@@ -11,8 +11,10 @@ public class BaseStation : MonoBehaviour
      * Has a virtual function for action
      * Timer to do the action again
      */
-    protected bool _canInteract;
+    public Transform PlacementPosition;
     public float InteractRate = 1;
+    protected bool _canInteract;
+    
     protected virtual void OnTriggerStay(Collider other)
     {
 	    if(other.CompareTag("Player"))
