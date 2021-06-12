@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -75,7 +76,6 @@ public class Player : MonoBehaviour
             Debug.Log("Controller not found, should be disabling this");
             gameObject.SetActive(false);
         }
-
     }
 
     private void FixedUpdate()
@@ -138,7 +138,6 @@ public class Player : MonoBehaviour
         {
             case "Interact":
                 Debug.Log("bang banggg yourrrr dead");
-                
                 break;
         }
     }

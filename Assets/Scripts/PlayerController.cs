@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,13 @@ public class PlayerController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         playerInputs = GetComponent<PlayerInput>();
         PlayerManager.AddPlayer(this);
+
+        PlayerInputs.onDeviceLost += DebugDeviceLost;
+    }
+
+    private void DebugDeviceLost(PlayerInput obj)
+    {
+        Debug.Log("Device is lost on " + gameObject.name);
     }
 
     private void OnDestroy()
