@@ -15,11 +15,11 @@ D:/Game Development/Metal2Man
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-61680
+62180
 Successfully changed project path to: D:/Game Development/Metal2Man
 D:/Game Development/Metal2Man
 Using Asset Import Pipeline V2.
-Refreshing native plugins compatible for Editor in 20.26 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 19.94 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2020.3.11f1 (99c7afb366b3)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2020.3.11f1/Editor/Data/Resources/UnitySubsystems
@@ -35,75 +35,43 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2020.3.11f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2020.3.11f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2020.3.11f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56292
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56556
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2020.3.11f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.001387 seconds.
+Registered in 0.001340 seconds.
 Native extension for WindowsStandalone target not found
-Refreshing native plugins compatible for Editor in 20.97 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 20.08 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.826 seconds
+- Completed reload, in  0.812 seconds
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.001648 seconds.
+Registered in 0.001596 seconds.
 Begin MonoManager ReloadAssembly
 Native extension for WindowsStandalone target not found
 Refreshing native plugins compatible for Editor in 0.25 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.753 seconds
+- Completed reload, in  0.748 seconds
 Platform modules already initialized, skipping
 ========================================================================
 Worker process is ready to serve import requests
 Launched and connected shader compiler UnityShaderCompiler.exe after 0.03 seconds
-Refreshing native plugins compatible for Editor in 0.26 ms, found 2 plugins.
+Refreshing native plugins compatible for Editor in 0.25 ms, found 2 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Unloading 1386 Unused Serialized files (Serialized files now loaded: 0)
-System memory in use before: 64.5 MB.
-System memory in use after: 64.6 MB.
+System memory in use before: 64.9 MB.
+System memory in use after: 65.0 MB.
 
-Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 1820.
-Total: 1.574200 ms (FindLiveObjects: 0.122500 ms CreateObjectMapping: 0.037200 ms MarkObjects: 1.347700 ms  DeleteObjects: 0.065900 ms)
-
-========================================================================
-Received Import Request.
-  path: Assets/Scenes
-  artifactKey: Guid(0b23729818184f54b8e3403e70b1c6cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Scenes using Guid(0b23729818184f54b8e3403e70b1c6cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9155a486ac2a29696fe156c20d97ef5b') in 0.007701 seconds
-  Import took 0.009415 seconds .
+Unloading 18 unused Assets to reduce memory usage. Loaded Objects now: 1821.
+Total: 1.534700 ms (FindLiveObjects: 0.108000 ms CreateObjectMapping: 0.030000 ms MarkObjects: 1.350100 ms  DeleteObjects: 0.045800 ms)
 
 ========================================================================
 Received Import Request.
-  Time since last request: 31.990221 seconds.
-  path: Assets/WelderGuy.fbx
-  artifactKey: Guid(bc0a33ab00e4a704fbcdc15e678cda25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/WelderGuy.fbx using Guid(bc0a33ab00e4a704fbcdc15e678cda25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8c666614fd53ed688590cf1abe2159f8') in 0.318989 seconds
-  Import took 0.320860 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 752.013832 seconds.
-  path: Assets
-  artifactKey: Guid(00000000000000001000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets using Guid(00000000000000001000000000000000) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '42d402b061de3733987d63b9cc3b64de') in 0.006958 seconds
-  Import took 0.009054 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 4.341728 seconds.
-  path: Assets/WelderGuy.fbx
-  artifactKey: Guid(bc0a33ab00e4a704fbcdc15e678cda25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/WelderGuy.fbx using Guid(bc0a33ab00e4a704fbcdc15e678cda25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '38157d839e86256b401433abb7edd724') in 0.229320 seconds
-  Import took 0.231332 seconds .
-
-========================================================================
-Received Import Request.
-  Time since last request: 141.545011 seconds.
-  path: Assets/WelderGuy.fbx
-  artifactKey: Guid(bc0a33ab00e4a704fbcdc15e678cda25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/WelderGuy.fbx using Guid(bc0a33ab00e4a704fbcdc15e678cda25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'cc0e5b0eaa35ce7269453f04103fdf0c') in 0.062641 seconds
-  Import took 0.064918 seconds .
+  path: Assets/Level1.unity
+  artifactKey: Guid(1ab35f58731aed24db6996a1ec8fe70e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Level1.unity using Guid(1ab35f58731aed24db6996a1ec8fe70e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '17b6b27364b70555a69b152017d3f83e') in 0.012780 seconds
+  Import took 0.014460 seconds .
 
 AssetImportWorkerClient::OnTransportError - code=2 error=End of file
