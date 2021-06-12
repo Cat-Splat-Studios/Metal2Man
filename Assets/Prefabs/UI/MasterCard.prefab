@@ -386,6 +386,7 @@ GameObject:
   - component: {fileID: 6993077147468133623}
   - component: {fileID: 5095753299576677169}
   - component: {fileID: 5861046410614123667}
+  - component: {fileID: 7491112054311951021}
   m_Layer: 5
   m_Name: MasterCard
   m_TagString: Untagged
@@ -455,3 +456,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &7491112054311951021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8524243370220128424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d06aa48786f04054a9501cea96999dca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FinalDisplay: {fileID: 5386232328847889404}
+  Req_Components:
+  - {fileID: 3966792380595453487}
+  - {fileID: 3505396788548416923}
+  - {fileID: 6747922545298502145}
+  testCube: {fileID: 0}
