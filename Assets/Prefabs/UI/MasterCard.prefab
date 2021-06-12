@@ -469,8 +469,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FinalDisplay: {fileID: 5386232328847889404}
-  Req_Components:
+  Robo_Components:
   - {fileID: 3966792380595453487}
   - {fileID: 3505396788548416923}
   - {fileID: 6747922545298502145}
   testCube: {fileID: 0}
+  testComponent: {fileID: 0}
+  yOffset: 0.25

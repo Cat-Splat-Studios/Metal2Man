@@ -14,7 +14,7 @@ public class AssemblyTray : MonoBehaviour
 
     public Order[] orderTemplate;
 
-    private Order currentOrder;
+    public Order currentOrder;
 
     private GameObject armComp = null;
     private GameObject bodyComp = null;
@@ -24,6 +24,8 @@ public class AssemblyTray : MonoBehaviour
     private void Start()
     {
         GenerateOrder();
+
+        DataManager.ToTheCloud(DataKeys.ASSEMBLYTRAY, this);
     }
 
     public void AddComponent(Component component)
@@ -90,7 +92,7 @@ public class AssemblyTray : MonoBehaviour
         GenerateOrder();
     }
     
-    private void BuildRobot()
+    private void BuildRobot() //This is more or less, we have finished our order -> start a new one 
     {
         GameObject robotObj = Instantiate(robotPrefab, buildArea.position, Quaternion.identity);
 

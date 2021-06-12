@@ -12,6 +12,7 @@ public class MasterCardHandler : MonoBehaviour
 
     //big picture of final product
     public Image FinalDisplay;
+    private Order currentOrder;
 
     public Image[] Robo_Components = new Image[3];
 
@@ -27,8 +28,14 @@ public class MasterCardHandler : MonoBehaviour
     public float yOffset = 0.25f;
     private void Start()
     {
+        //if we need a reference to currentOrder
+        currentOrder = DataManager.MakeItRain<AssemblyTray>(DataKeys.ASSEMBLYTRAY).currentOrder;
+
+        if (!currentOrder)
+            Debug.LogError("Current order not found");
         //ComponentRetrieved(1, testCube);
-        AddComponentToUI(testComponent);
+        if (currentOrder)
+            AddComponentToUI(testComponent);
     }
 
     public void AddComponentToUI(Component component)
@@ -37,22 +44,37 @@ public class MasterCardHandler : MonoBehaviour
         {
             case EPartType.Arms:
                 if (armComp) return; //if we already have it dont do anyfing
-                component.transform.position = SetComponentWorldPos(Robo_Components[0].transform); //set compo to the set position on the canvas
-                armComp = component.gameObject;
+
+                if (component.partName == currentOrder.armPart) //make sure the part is the one on the order
+                {
+                    component.transform.position = SetComponentWorldPos(Robo_Components[0].transform); //set compo to the set position on the canvas
+                    armComp = component.gameObject;
+                }
                 break;
             
             case EPartType.Body:
                 if (bodyComp) return; //if we already have it dont do anyfing
-                component.transform.position = SetComponentWorldPos(Robo_Components[1].transform); //set compo to the set position on the canvas
-                bodyComp = component.gameObject;
+
+                if (component.partName == currentOrder.bodyPart)
+                {
+                    component.transform.position = SetComponentWorldPos(Robo_Components[1].transform); //set compo to the set position on the canvas
+                    bodyComp = component.gameObject;
+                }
                 break;
 
             case EPartType.Bottom:
                 if (bottomComp) return; //if we already have it dont do anyfing
-                component.transform.position = SetComponentWorldPos(Robo_Components[2].transform); //set compo to the set position on the canvas
-                bottomComp = component.gameObject;
+
+                if (component.partName == currentOrder.bottomPart)
+                {
+                    component.transform.position = SetComponentWorldPos(Robo_Components[2].transform); //set compo to the set position on the canvas
+                    bottomComp = component.gameObject;
+                }
                 break;
+   
         }
+
+        CheckOrderProgress();
     }
 
     private Vector3 SetComponentWorldPos(Transform ImageLocation)
@@ -60,16 +82,21 @@ public class MasterCardHandler : MonoBehaviour
         Vector3 newPos = new Vector3(ImageLocation.position.x, ImageLocation.position.y + yOffset, ImageLocation.position.z);
         return newPos;
     }
-
-    public void ComponentRetrieved(int cardIndex, GameObject Component) //this has been reworked
+    private void CheckOrderProgress()
     {
-          if (Robo_Components[cardIndex - 1] != null)
-          {
-                MaterialHandler.ImageColorChanger(Robo_Components[cardIndex - 1], Color.black);
-
-                Vector3 componentPos = Robo_Components[cardIndex - 1].transform.position;
-                testCube.transform.position = new Vector3(componentPos.x, componentPos.y + 0.55f, componentPos.z);
-          }
-        
+        if (armComp && bodyComp && bottomComp)
+        {
+            //if all our components are not null -> they have been placed.
+            Debug.Log("Order Completed");
+            ClearComponentsOnComplete();
+        }    
     }
+
+    private void ClearComponentsOnComplete()
+    {
+        armComp = null;
+        bodyComp = null;
+        bottomComp = null;
+    }
+
 }
