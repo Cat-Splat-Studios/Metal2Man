@@ -72,13 +72,21 @@ public class Player : MonoBehaviour
 
         MovementVector = new Vector3(inputVector_L.x, 0, inputVector_L.y);   
 
-        //set our velocity to our input direction
-        rb.velocity = MovementVector.normalized * PlayerSpeed;
-
+       
         //only update rotation if the vector is greater than zero (if there was any input)
         //this is more or less a 'deadzone' on a joystick
-        if (MovementVector.magnitude >= axisDeadZone ) 
+        if (MovementVector.magnitude >= axisDeadZone)
+        {
+            //set our velocity to our input direction
+            rb.velocity = MovementVector.normalized * PlayerSpeed;
+
             transform.rotation = Quaternion.LookRotation(MovementVector.normalized);
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+        }
     }
 
     //we can do it in a switch - but movement should be seperate

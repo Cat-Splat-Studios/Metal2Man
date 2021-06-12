@@ -150,28 +150,26 @@ Transform:
   m_LocalPosition: {x: -1.962325, y: -1.294177, z: 2.3039393}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 934945030}
-  - {fileID: 2023158068}
-  - {fileID: 351109576}
-  - {fileID: 1209646012}
-  - {fileID: 1249457156}
-  - {fileID: 1135594835}
-  - {fileID: 997374423}
-  - {fileID: 166352208}
-  - {fileID: 1800623547}
-  - {fileID: 1503160800}
   - {fileID: 72173197}
+  - {fileID: 670134486}
   - {fileID: 135113041}
   - {fileID: 2020432967}
+  - {fileID: 1218711511}
   - {fileID: 1579270397}
   - {fileID: 109578487}
-  - {fileID: 670134486}
+  - {fileID: 1800623547}
+  - {fileID: 934945030}
   - {fileID: 1565999371}
+  - {fileID: 2023158068}
   - {fileID: 1824170473}
+  - {fileID: 351109576}
+  - {fileID: 1209646012}
   - {fileID: 2131883891}
-  - {fileID: 1218711511}
-  - {fileID: 859824528}
+  - {fileID: 1249457156}
+  - {fileID: 1135594835}
   - {fileID: 387155196}
+  - {fileID: 997374423}
+  - {fileID: 859824528}
   - {fileID: 1411663608}
   - {fileID: 894164122}
   - {fileID: 1465756953}
@@ -179,12 +177,14 @@ Transform:
   - {fileID: 101364159}
   - {fileID: 391895785}
   - {fileID: 1197693591}
+  - {fileID: 166352208}
   - {fileID: 1405870228}
   - {fileID: 1689433650}
   - {fileID: 1507987086}
   - {fileID: 1504982073}
   - {fileID: 1908220433}
   - {fileID: 1793973729}
+  - {fileID: 1503160800}
   - {fileID: 1225074995}
   - {fileID: 1497057709}
   - {fileID: 445101796}
@@ -6076,6 +6076,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5874248807043152905, guid: d2efd67a1ee56a148b1d7d8a97e07d3b, type: 3}
+      propertyPath: m_Mass
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 5874248807043152910, guid: d2efd67a1ee56a148b1d7d8a97e07d3b, type: 3}
       propertyPath: m_RootOrder
       value: 1
