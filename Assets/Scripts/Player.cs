@@ -58,11 +58,11 @@ public class Player : MonoBehaviour
         _isInteracting = !_isInteracting;
     }
 
-    private void FixedUpdate()
-    {
-        HandleMovement(); //handle movement is gunna handle rotation as well - unless we want twin stick mobility
-        //HandleRotation();
-    }
+    //private void FixedUpdate()
+    //{
+    //    //HandleMovement(); //handle movement is gunna handle rotation as well - unless we want twin stick mobility
+    //    //HandleRotation();
+    //}
 
     private void HandleRotation()
     {

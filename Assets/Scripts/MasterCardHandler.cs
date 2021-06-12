@@ -34,8 +34,8 @@ public class MasterCardHandler : MonoBehaviour
         if (!currentOrder)
             Debug.LogError("Current order not found");
         //ComponentRetrieved(1, testCube);
-        if (currentOrder)
-            AddComponentToUI(testComponent);
+     
+        AddComponentToUI(testComponent);
     }
 
     public void AddComponentToUI(Component component)

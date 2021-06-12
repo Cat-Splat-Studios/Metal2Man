@@ -934,7 +934,7 @@ public class @PlayerControlActions : IInputActionCollection, IDisposable
             {
                 @Move.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
-                @Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
+                //@Move.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnMove;
                 @Look.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
                 @Look.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnLook;
@@ -947,7 +947,7 @@ public class @PlayerControlActions : IInputActionCollection, IDisposable
             {
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
-                @Move.canceled += instance.OnMove;
+                //@Move.canceled += instance.OnMove;
                 @Look.started += instance.OnLook;
                 @Look.performed += instance.OnLook;
                 @Look.canceled += instance.OnLook;
