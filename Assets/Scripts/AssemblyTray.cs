@@ -22,7 +22,6 @@ public class AssemblyTray : MonoBehaviour
 
     public void AddComponent(Component component)
     {
-        Debug.Log("ADD");
         switch (component.partType)
         {
             case EPartType.Arms:
@@ -40,9 +39,7 @@ public class AssemblyTray : MonoBehaviour
                 bodyComp = bodyObj;
                 break;
             case EPartType.Bottom:
-                Debug.Log("BOTTOM");
                 if (bottomComp) return;
-                Debug.Log("CREATE");
                 GameObject bottomObj = Instantiate(buildLibrary.GetBuildObject(component.partName),
                     bottomArea.position, Quaternion.identity);
                 bottomObj.transform.parent = bottomArea;
@@ -57,8 +54,6 @@ public class AssemblyTray : MonoBehaviour
     private void CheckComponents ()
     {
         if (!armComp || !bodyComp || !bodyComp) return;
-        
-        Debug.Log("BUILD");
         BuildRobot();
     }
 
