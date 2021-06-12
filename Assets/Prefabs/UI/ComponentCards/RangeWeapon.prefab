@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4947899323666406753, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_Name
-      value: MeleeRangeCard
+      value: RangeWeapon
       objectReference: {fileID: 0}
     - target: {fileID: 6046694427672863038, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_Pivot.x
@@ -25,27 +25,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6046694427672863038, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6046694427672863038, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6046694427672863038, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6046694427672863038, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6046694427672863038, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 250
+      value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 6046694427672863038, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 300
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6046694427672863038, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_LocalPosition.x
@@ -77,11 +77,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6046694427672863038, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 427
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6046694427672863038, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -150
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6046694427672863038, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -94,6 +94,10 @@ PrefabInstance:
     - target: {fileID: 6046694427672863038, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942585580311854569, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
+      propertyPath: partName
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8672235052514346549, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_Sprite

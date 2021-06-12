@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   robotName: Melee Robot
   robotPrefab: {fileID: 0}
-  buildTime: 120
+  buildTime: 5
   robotImage: {fileID: 21300000, guid: e1ee932bdae74334db0d4db702e5ab71, type: 3}
   components:
   - type: 0
     name: 1
-    ComponentCardPrefab: {fileID: 0}
+    ComponentCardPrefab: {fileID: 8307865533429614375, guid: 4a79acbc098d87e44b7bb09194cc467f, type: 3}
   - type: 1
     name: 3
-    ComponentCardPrefab: {fileID: 0}
+    ComponentCardPrefab: {fileID: 9040739819564827895, guid: 2b0d39ca056529445a291184d313e2cf, type: 3}

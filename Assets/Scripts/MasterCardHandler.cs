@@ -29,10 +29,6 @@ public class MasterCardHandler : MonoBehaviour
 
     public Animator anim;
 
-    public HudComponents hudComponents;
-
-    public bool isLeft = false;
-
     private float startTime;
     private float orderTime;
     private bool onTheClock = false;
@@ -42,10 +38,10 @@ public class MasterCardHandler : MonoBehaviour
     {
         assemblyTray.onOrderComplete = () =>
         {
-            StartCoroutine(startNextOrder());
+            StartCoroutine(startNextOrder(3.0f));
         };
         
-        StartCoroutine(startNextOrder());
+        StartCoroutine(startNextOrder(3.0f));
     }
 
     private void Update()
@@ -60,7 +56,9 @@ public class MasterCardHandler : MonoBehaviour
             // order incomplete
             // Remove all info from assembly
             // generate new order
-            onTheClock = false;
+            assemblyTray.RemoveComponents();
+            assemblyTray.ClearComponentCards();
+            StartCoroutine(startNextOrder(3.0f));
         }
     }
 
@@ -70,10 +68,7 @@ public class MasterCardHandler : MonoBehaviour
         Order currentOrder = orderTemplates[index];
         PopulateCard(currentOrder);
         assemblyTray.SetCurrentOrder(currentOrder);
-        if (isLeft)
-        {
-            hudComponents.populateLeftSecion(currentOrder.components);
-        }
+    
         orderTime = currentOrder.buildTime;
         startTime = currentOrder.buildTime;
         onTheClock = true;
@@ -102,11 +97,11 @@ public class MasterCardHandler : MonoBehaviour
         }
     }
 
-    private IEnumerator startNextOrder()
+    private IEnumerator startNextOrder(float seconds)
     {
         onTheClock = false;
         RemoveCard();
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(seconds);
         ShowCard();
         GenerateOrder();
     }

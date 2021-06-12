@@ -14,12 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   robotName: Gunner Robot
   robotPrefab: {fileID: 0}
-  buildTime: 120
+  buildTime: 5
   robotImage: {fileID: 21300000, guid: e1ee932bdae74334db0d4db702e5ab71, type: 3}
   components:
   - type: 0
     name: 2
-    ComponentCardPrefab: {fileID: 0}
+    ComponentCardPrefab: {fileID: 8144593122552910101, guid: d7af3e630a58ba046927dcc7aef715c5, type: 3}
   - type: 1
     name: 3
-    ComponentCardPrefab: {fileID: 0}
+    ComponentCardPrefab: {fileID: 9040739819564827895, guid: 2b0d39ca056529445a291184d313e2cf, type: 3}
