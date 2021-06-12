@@ -9,18 +9,25 @@ public class Player : MonoBehaviour
     public PlayerInput input;
 
     public float PlayerSpeed;
-    
+    public Transform HoldItemPosition;
     Vector2 inputVector_L; //left stick
     Vector2 inputVector_R; //left stick
     Vector3 MovementVector;
     Vector3 RotationVector;
     float axisDeadZone = 0.15f;
-    private bool isInteracting;
+    private bool _isInteracting;
+    private bool _isHoldingItem;
     Rigidbody rb;
     public bool IsInteracting
     {
-        get => isInteracting;
-        set => isInteracting = value;
+        get => _isInteracting;
+        set => _isInteracting = value;
+    }
+
+    public bool IsHoldingItem
+    {
+        get => _isHoldingItem;
+        set => _isHoldingItem = value;
     }
 
     private void Awake()
@@ -47,8 +54,7 @@ public class Player : MonoBehaviour
 
     public void ToggleInteractFlag()
     {
-        isInteracting = !isInteracting;
-        Debug.Log($"Interact: {isInteracting}");
+        _isInteracting = !_isInteracting;
     }
 
     private void FixedUpdate()

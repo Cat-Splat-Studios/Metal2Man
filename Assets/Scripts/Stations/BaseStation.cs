@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public class BaseStation : MonoBehaviour
@@ -10,7 +11,8 @@ public class BaseStation : MonoBehaviour
      * Has a virtual function for action
      * Timer to do the action again
      */
-
+    protected bool _canInteract;
+    public float InteractRate = 1;
     protected virtual void OnTriggerStay(Collider other)
     {
 	    if(other.CompareTag("Player"))
@@ -23,8 +25,20 @@ public class BaseStation : MonoBehaviour
 	    }
     }
 
+    private void OnEnable()
+    {
+	    _canInteract = true;
+    }
+
+    protected IEnumerator ReplenishDuration()
+    {
+	    _canInteract = false;
+	    yield return new WaitForSeconds(InteractRate);
+	    _canInteract = true;
+    }
+
     protected virtual void StationAction()
     {
-	    Debug.Log("Interacted!");
+	    StartCoroutine(ReplenishDuration());
     }
 }
