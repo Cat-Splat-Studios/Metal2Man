@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
     Vector2 inputVector_R; //left stick
     Vector3 MovementVector;
     Vector3 RotationVector;
+    float axisDeadZone = 0.15f;
 
     Rigidbody rb;
 
@@ -65,7 +66,11 @@ public class Player : MonoBehaviour
 
         //set our velocity to our input direction
         rb.velocity = MovementVector.normalized * PlayerSpeed;
-        transform.rotation = Quaternion.LookRotation(MovementVector.normalized);
+
+        //only update rotation if the vector is greater than zero (if there was any input)
+        //this is more or less a 'deadzone' on a joystick
+        if (MovementVector.magnitude >= axisDeadZone ) 
+            transform.rotation = Quaternion.LookRotation(MovementVector.normalized);
 
     }
 
