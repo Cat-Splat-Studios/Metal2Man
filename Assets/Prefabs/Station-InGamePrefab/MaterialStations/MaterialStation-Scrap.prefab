@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 7549608945435535375}
   - component: {fileID: 7549608945435535374}
   m_Layer: 0
-  m_Name: MaterialStation-MaterialC
+  m_Name: MaterialStation-Scrap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e008b1e9d917b4d409aeb0a953b857d6, type: 2}
+  - {fileID: 2100000, guid: be6d418f892011240a9c0fcf3b767e39, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -155,4 +155,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlacementPosition: {fileID: 7428698453139820821}
   InteractRate: 1
-  Prefab: {fileID: 704639221381008431, guid: daf1119effadfc0438521aaff8791530, type: 3}
+  Prefab: {fileID: 8214950032862621065, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}

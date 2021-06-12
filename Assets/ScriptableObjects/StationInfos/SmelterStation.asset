@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a7a0acf8d853494995ccd872755a9e4, type: 3}
   m_Name: SmelterStation
   m_EditorClassIdentifier: 
-  RequiredMaterials: 00000000
-  ProcessedResultPrefab: {fileID: 0}
+  Orders:
+  - RequiredMaterials: 00000000
+    ProcessedResultPrefab: {fileID: 1582459627531564121, guid: bfe5093132dfcf042acaea2c9705ab57, type: 3}
+    OrderType: 0
   ProcessDuration: 0.5

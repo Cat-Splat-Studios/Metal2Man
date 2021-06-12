@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a7a0acf8d853494995ccd872755a9e4, type: 3}
-  m_Name: WeaponFabStation
+  m_Name: 3DPrinterStation
   m_EditorClassIdentifier: 
   Orders:
-  - RequiredMaterials: 0400000001000000
-    ProcessedResultPrefab: {fileID: 3406122253687583029, guid: f1e549dc40da61544baed0724f0b17c7, type: 3}
-    OrderType: 0
-  - RequiredMaterials: 0400000005000000
-    ProcessedResultPrefab: {fileID: 1963974094393220912, guid: abb931e12edca044495e8b8b5459a835, type: 3}
-    OrderType: 0
-  ProcessDuration: 1
+  - RequiredMaterials: 00000000
+    ProcessedResultPrefab: {fileID: 8433320174598646450, guid: c7f4595ac6d61c347a3dc6bd97b8bd7a, type: 3}
+    OrderType: 5
+  - RequiredMaterials: 02000000
+    ProcessedResultPrefab: {fileID: 3661571067990792295, guid: 35f627d270cc7674497f9f835154f6d1, type: 3}
+    OrderType: 6
+  ProcessDuration: 0.5

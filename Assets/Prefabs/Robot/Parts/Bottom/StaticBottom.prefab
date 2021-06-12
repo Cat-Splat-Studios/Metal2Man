@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partType: 1
-  partName: 1
+  partName: 7
 --- !u!1001 &7276491085318092619
 PrefabInstance:
   m_ObjectHideFlags: 0

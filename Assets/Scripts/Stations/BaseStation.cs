@@ -27,7 +27,7 @@ public class BaseStation : MonoBehaviour
 	    }
     }
 
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
 	    _canInteract = true;
     }

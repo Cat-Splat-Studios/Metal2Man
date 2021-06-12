@@ -152,11 +152,10 @@ public class Player : MonoBehaviour
     //we can do it in a switch - but movement should be seperate
     private void HandleInputs(InputAction.CallbackContext context)
     {
-        Debug.Log($"Context: {context.action.name}");
         switch (context.action.name)
         {
             case "Interact":
-                Debug.Log("bang banggg yourrrr dead");
+                ToggleInteractFlag();
                 break;
         }
     }

@@ -8,7 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Ryan_Lobby.unity
     guid: c552b69230266664cbf4a0478746ed0a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Level1.unity
     guid: a0b98c759086bc24798ea2a36165fb27
+  - enabled: 1
+    path: Assets/Scenes/FrancosTestScene.unity
+    guid: 410309511df6e1c44a85512e302a30bb
   m_configObjects: {}
