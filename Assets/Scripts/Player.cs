@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -30,11 +31,14 @@ public class Player : MonoBehaviour
         set => _isHoldingItem = value;
     }
 
+    [SerializeField] PlayerController controller;
+    [SerializeField] int playerIndex = 0;
+
     private void Awake()
     {
-        input = GetComponent<PlayerInput>(); //make sure we have the component
-        if (!input)
-            Debug.Log("Input component wasnt found - get guud");
+        //input = GetComponent<PlayerInput>(); //make sure we have the component
+        //if (!input)
+        //    Debug.Log("Input component wasnt found - get guud");
 
         rb = GetComponent<Rigidbody>();
         if (!rb)
@@ -45,12 +49,44 @@ public class Player : MonoBehaviour
             PlayerSpeed = 5.0f;
             Debug.Log("speed wasnt set defaulting to: " + PlayerSpeed);
         }
-            
-        input.ActivateInput(); //enable the input 
-        
-        input.onActionTriggered += HandleInputs;
+       
         //ToDo - Need to make a Game Manager to create player instances then add them to the cloud with "Player" + index as the DataKey
         DataManager.ToTheCloud(gameObject.tag,this);
+    }
+
+    private void Start()
+    {        
+        if (PlayerManager.IsPlayerInRange(playerIndex))
+        {
+            controller = PlayerManager.GetController(playerIndex);
+            if (controller != null)
+            {
+                input = controller.PlayerInputs;
+                input.actions["Move"].performed += UpdateMovementInput;
+                input.actions["Move"].canceled += UpdateMovementInput;
+
+                input.onActionTriggered += HandleInputs;
+
+                input.ActivateInput(); //enable the input 
+            }
+        }
+        else
+        {
+            Debug.Log("Controller not found, should be disabling this");
+            gameObject.SetActive(false);
+        }
+
+    }
+
+    private void FixedUpdate()
+    {
+        HandleMovement();
+        //HandleRotation();
+    }
+
+    private void UpdateMovementInput(InputAction.CallbackContext context)
+    {
+        inputVector_L = context.ReadValue<Vector2>();
     }
 
     public void ToggleInteractFlag()
@@ -75,8 +111,6 @@ public class Player : MonoBehaviour
 
     public void HandleMovement()
     {
-        inputVector_L = input.actions["Move"].ReadValue<Vector2>();
-
         MovementVector = new Vector3(inputVector_L.x, 0, inputVector_L.y);   
 
        
