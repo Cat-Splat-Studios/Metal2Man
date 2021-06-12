@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class AssemblyTray : MonoBehaviour
 {
@@ -13,33 +12,52 @@ public class AssemblyTray : MonoBehaviour
 
     public BuildLibrary buildLibrary;
 
+    public Order[] orderTemplate;
+
+    private Order currentOrder;
+
     private GameObject armComp = null;
     private GameObject bodyComp = null;
     private GameObject bottomComp = null;
 
-
     // TODO check order
+    private void Start()
+    {
+        GenerateOrder();
+    }
 
     public void AddComponent(Component component)
     {
         switch (component.partType)
         {
             case EPartType.Arms:
-                if (armComp) return;
+                if (armComp || component.partName != currentOrder.armPart)
+                {
+                    BuildError();
+                    return;
+                }
                 GameObject armObj = Instantiate(buildLibrary.GetBuildObject(component.partName),
                     armArea.position, Quaternion.identity);
                 armObj.transform.parent = armArea;
                 armComp = armObj;
                 break;
             case EPartType.Body:
-                if (bodyComp) return;
+                if (bodyComp || component.partName != currentOrder.bodyPart)
+                {
+                    BuildError();
+                    return;
+                }
                 GameObject bodyObj = Instantiate(buildLibrary.GetBuildObject(component.partName),
                     bodyArea.position, Quaternion.identity);
                 bodyObj.transform.parent = bodyArea;
                 bodyComp = bodyObj;
                 break;
             case EPartType.Bottom:
-                if (bottomComp) return;
+                if (bottomComp || component.partName != currentOrder.bottomPart)
+                {
+                    BuildError();
+                    return;
+                }
                 GameObject bottomObj = Instantiate(buildLibrary.GetBuildObject(component.partName),
                     bottomArea.position, Quaternion.identity);
                 bottomObj.transform.parent = bottomArea;
@@ -50,18 +68,26 @@ public class AssemblyTray : MonoBehaviour
         CheckComponents();
     }
 
+    public void GenerateOrder()
+    {
+        int idx = Random.Range(0, orderTemplate.Length);
+
+        currentOrder = orderTemplate[idx];
+    }
   
     private void CheckComponents ()
     {
         if (!armComp || !bodyComp || !bodyComp) return;
         BuildRobot();
     }
-
+    
     private void RemoveComponents()
     {
         bodyComp = null;
         armComp = null;
         bottomComp = null;
+        
+        GenerateOrder();
     }
     
     private void BuildRobot()
@@ -77,6 +103,12 @@ public class AssemblyTray : MonoBehaviour
             RemoveComponents();
         }
     }
+
+    private void BuildError()
+    {
+        // TODO something when invalid component gets entered in
+    }
+    
     
     
     public void TestAddWheelBottom()
