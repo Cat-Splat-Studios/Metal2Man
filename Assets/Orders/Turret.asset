@@ -10,9 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5e071cab2976174bb6f3ff0742694fc, type: 3}
-  m_Name: StaticTurretRobot
+  m_Name: Turret
   m_EditorClassIdentifier: 
   robotName: Turret Robot
-  armPart: 3
-  bodyPart: 2
-  bottomPart: 1
+  robotPrefab: {fileID: 0}
+  buildTime: 60
+  robotImage: {fileID: 21300000, guid: e1ee932bdae74334db0d4db702e5ab71, type: 3}
+  components:
+  - type: 0
+    name: 2
+    ComponentCardPrefab: {fileID: 0}

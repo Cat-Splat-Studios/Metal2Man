@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class MasterCardHandler : MonoBehaviour
 {
@@ -11,92 +13,118 @@ public class MasterCardHandler : MonoBehaviour
     //when 3 are done we advance to our next build
 
     //big picture of final product
-    public Image FinalDisplay;
-    private Order currentOrder;
 
-    public Image[] Robo_Components = new Image[3];
+    public AssemblyTray assemblyTray;
 
-    public GameObject testCube;
+    public Image robotImage;
+    public Image WeaponImage;
+    public Image BodyImage;
+    public Image CircuitboardImage;
 
-    private GameObject armComp = null;
-    private GameObject bodyComp = null;
-    private GameObject bottomComp = null;
+    public BuildLibrary buildLibrary;
+    
+    public Order[] orderTemplates;
 
-    public Component testComponent;
+    public Slider timeSlider;
 
+    public Animator anim;
 
+    public HudComponents hudComponents;
+
+    public bool isLeft = false;
+
+    private float startTime;
+    private float orderTime;
+    private bool onTheClock = false;
+    
     public float yOffset = 0.25f;
     private void Start()
     {
-        //if we need a reference to currentOrder
-        currentOrder = DataManager.MakeItRain<AssemblyTray>(DataKeys.ASSEMBLYTRAY).currentOrder;
-
-        if (!currentOrder)
-            Debug.LogError("Current order not found");
-        //ComponentRetrieved(1, testCube);
-     
-        AddComponentToUI(testComponent);
+        assemblyTray.onOrderComplete = () =>
+        {
+            StartCoroutine(startNextOrder());
+        };
+        
+        StartCoroutine(startNextOrder());
     }
 
-    public void AddComponentToUI(Component component)
+    private void Update()
     {
-        switch (component.partType)
+        if (!onTheClock) return;
+        
+        orderTime -= Time.deltaTime;
+        DisplaySlider();
+
+        if (orderTime <= 0.0f)
         {
-            case EPartType.Arms:
-                if (armComp) return; //if we already have it dont do anyfing
-
-                if (component.partName == currentOrder.armPart) //make sure the part is the one on the order
-                {
-                    component.transform.position = SetComponentWorldPos(Robo_Components[0].transform); //set compo to the set position on the canvas
-                    armComp = component.gameObject;
-                }
-                break;
-            
-            case EPartType.Body:
-                if (bodyComp) return; //if we already have it dont do anyfing
-
-                if (component.partName == currentOrder.bodyPart)
-                {
-                    component.transform.position = SetComponentWorldPos(Robo_Components[1].transform); //set compo to the set position on the canvas
-                    bodyComp = component.gameObject;
-                }
-                break;
-
-            case EPartType.Bottom:
-                if (bottomComp) return; //if we already have it dont do anyfing
-
-                if (component.partName == currentOrder.bottomPart)
-                {
-                    component.transform.position = SetComponentWorldPos(Robo_Components[2].transform); //set compo to the set position on the canvas
-                    bottomComp = component.gameObject;
-                }
-                break;
-   
+            // order incomplete
+            // Remove all info from assembly
+            // generate new order
+            onTheClock = false;
         }
-
-        CheckOrderProgress();
     }
 
-    private Vector3 SetComponentWorldPos(Transform ImageLocation)
+    public void GenerateOrder()
     {
-        Vector3 newPos = new Vector3(ImageLocation.position.x, ImageLocation.position.y + yOffset, ImageLocation.position.z);
-        return newPos;
-    }
-    private void CheckOrderProgress()
-    {
-        if (armComp && bodyComp && bottomComp)
+        int index = Random.Range(0, orderTemplates.Length);
+        Order currentOrder = orderTemplates[index];
+        PopulateCard(currentOrder);
+        assemblyTray.SetCurrentOrder(currentOrder);
+        if (isLeft)
         {
-            //if all our components are not null -> they have been placed.
-            Debug.Log("Order Completed");
-            ClearComponentsOnComplete();
-        }    
+            hudComponents.populateLeftSecion(currentOrder.components);
+        }
+        orderTime = currentOrder.buildTime;
+        startTime = currentOrder.buildTime;
+        onTheClock = true;
     }
 
-    private void ClearComponentsOnComplete()
+    private void PopulateCard(Order order)
     {
-        armComp = null;
-        bodyComp = null;
-        bottomComp = null;
+        BodyImage.gameObject.SetActive(false);
+        WeaponImage.gameObject.SetActive(false);
+        
+        robotImage.sprite = order.robotImage;
+        CircuitboardImage.sprite = buildLibrary.GetBuildImage(EPartName.CircuitBoard);
+        foreach (var orderComponent in order.components)
+        {
+            switch (orderComponent.type)
+            {
+                case EPartType.Body:
+                    BodyImage.gameObject.SetActive(true);
+                    BodyImage.sprite = buildLibrary.GetBuildImage(orderComponent.name);
+                    break;
+                case EPartType.Weapon:
+                    WeaponImage.gameObject.SetActive(true);
+                    WeaponImage.sprite = buildLibrary.GetBuildImage(orderComponent.name);
+                    break;
+            }
+        }
     }
 
+    private IEnumerator startNextOrder()
+    {
+        onTheClock = false;
+        RemoveCard();
+        yield return new WaitForSeconds(2.0f);
+        ShowCard();
+        GenerateOrder();
+    }
+
+    public void ShowCard()
+    {
+        anim.SetBool("Show", true);
+    }
+
+    public void RemoveCard()
+    {
+        anim.SetBool("Show", false);
+    }
+    
+    private void DisplaySlider()
+    {
+        float percent = orderTime / startTime;
+
+        timeSlider.value = percent;
+    }
 }

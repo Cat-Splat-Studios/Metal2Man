@@ -1,6 +1,6 @@
 public enum EPartType
 {
-    Arms,
-    Bottom,
-    Body
+    Weapon,
+    Body,
+    CirtcuitBoard,
 }

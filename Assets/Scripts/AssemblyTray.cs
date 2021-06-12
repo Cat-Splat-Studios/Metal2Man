@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
 public class AssemblyTray : MonoBehaviour
@@ -6,45 +8,38 @@ public class AssemblyTray : MonoBehaviour
     public GameObject robotPrefab;
     public Transform buildArea;
     
-    public Transform armArea;
+    public Transform weaponArea;
     public Transform bodyArea;
-    public Transform bottomArea;
+    public Transform circuitArea;
 
     public BuildLibrary buildLibrary;
-
-    public Order[] orderTemplate;
-
+    
     public Order currentOrder;
 
-    private GameObject armComp = null;
+    public UnityAction onOrderComplete;
+
+    private GameObject weaponComp = null;
     private GameObject bodyComp = null;
-    private GameObject bottomComp = null;
-
-    // TODO check order
-    private void Start()
-    {
-        GenerateOrder();
-
-        DataManager.ToTheCloud(DataKeys.ASSEMBLYTRAY, this);
-    }
+    private GameObject circuitBoard = null;
+    
 
     public void AddComponent(Component component)
     {
         switch (component.partType)
         {
-            case EPartType.Arms:
-                if (armComp || component.partName != currentOrder.armPart)
+            case EPartType.Weapon:
+                if (weaponComp || NotInOrder(component.partName))
                 {
                     BuildError();
                     return;
                 }
-                GameObject armObj = Instantiate(buildLibrary.GetBuildObject(component.partName),
-                    armArea.position, Quaternion.identity);
-                armObj.transform.parent = armArea;
-                armComp = armObj;
+                GameObject weaponObj = Instantiate(buildLibrary.GetBuildObject(component.partName),
+                    weaponArea.position, Quaternion.identity);
+                weaponObj.transform.parent = weaponArea;
+                weaponComp = weaponObj;
                 break;
             case EPartType.Body:
-                if (bodyComp || component.partName != currentOrder.bodyPart)
+                if (bodyComp || NotInOrder(component.partName))
                 {
                     BuildError();
                     return;
@@ -54,56 +49,61 @@ public class AssemblyTray : MonoBehaviour
                 bodyObj.transform.parent = bodyArea;
                 bodyComp = bodyObj;
                 break;
-            case EPartType.Bottom:
-                if (bottomComp || component.partName != currentOrder.bottomPart)
+            case EPartType.CirtcuitBoard:
+                if (circuitBoard)
                 {
                     BuildError();
                     return;
                 }
-                GameObject bottomObj = Instantiate(buildLibrary.GetBuildObject(component.partName),
-                    bottomArea.position, Quaternion.identity);
-                bottomObj.transform.parent = bottomArea;
-                bottomComp = bottomObj;
+                GameObject circuitObj = Instantiate(buildLibrary.GetBuildObject(component.partName),
+                    circuitArea.position, Quaternion.identity);
+                circuitObj.transform.parent = circuitArea;
+                circuitBoard = circuitObj;
                 break;
         }
         
         CheckComponents();
     }
-
-    public void GenerateOrder()
+    
+    public void SetCurrentOrder(Order order)
     {
-        int idx = Random.Range(0, orderTemplate.Length);
+        currentOrder = order;
+    }
 
-        currentOrder = orderTemplate[idx];
+    private bool NotInOrder(EPartName partName)
+    {
+        foreach (var currentOrderComponent in currentOrder.components)
+        {
+            if (currentOrderComponent.name == partName)
+            {
+                return false;
+            }
+        }
+
+        return true;
     }
   
     private void CheckComponents ()
     {
-        if (!armComp || !bodyComp || !bodyComp) return;
+        if (!weaponComp || !bodyComp || !circuitBoard) return;
         BuildRobot();
     }
     
     private void RemoveComponents()
     {
+        Destroy(bodyComp);
         bodyComp = null;
-        armComp = null;
-        bottomComp = null;
-        
-        GenerateOrder();
+        Destroy(weaponComp);
+        weaponComp = null;
+        Destroy(circuitBoard);
+        circuitBoard = null;
+        onOrderComplete.Invoke();
     }
     
     private void BuildRobot() //This is more or less, we have finished our order -> start a new one 
     {
-        GameObject robotObj = Instantiate(robotPrefab, buildArea.position, Quaternion.identity);
-
-        Robot robot = robotObj.GetComponent<Robot>();
-        
-        if (robot)
-        {
-            robot.ContrucutRobot(bottomComp, bodyComp, armComp);
-            
-            RemoveComponents();
-        }
+        Instantiate(currentOrder.robotPrefab, buildArea.position, Quaternion.identity);
+        RemoveComponents();
     }
 
     private void BuildError()
@@ -113,49 +113,49 @@ public class AssemblyTray : MonoBehaviour
     
     
     
-    public void TestAddWheelBottom()
-    {
-        GameObject partObj = buildLibrary.GetBuildObject(EPartName.WheelBottom);
-
-        Component comp = partObj.GetComponent<Component>();
-        
-        AddComponent(comp);
-    }
-    
-    public void TestAddStaticBottom()
-    {
-        GameObject partObj = buildLibrary.GetBuildObject(EPartName.StaticBottom);
-
-        Component comp = partObj.GetComponent<Component>();
-        
-        AddComponent(comp);
-    }
-    
-    public void TestAddCubeBody()
-    {
-        GameObject partObj = buildLibrary.GetBuildObject(EPartName.CubeBody);
-
-        Component comp = partObj.GetComponent<Component>();
-        
-        AddComponent(comp);
-    }
-    
-    public void TestAddCannonArms()
-    {
-        GameObject partObj = buildLibrary.GetBuildObject(EPartName.CannonArms);
-
-        Component comp = partObj.GetComponent<Component>();
-        
-        AddComponent(comp);
-    }
-    
-    public void TestAddMeleeArms()
-    {
-        GameObject partObj = buildLibrary.GetBuildObject(EPartName.MeleeArms);
-
-        Component comp = partObj.GetComponent<Component>();
-        
-        AddComponent(comp);
-    }
+    // public void TestAddWheelBottom()
+    // {
+    //     GameObject partObj = buildLibrary.GetBuildObject(EPartName.WheelBottom);
+    //
+    //     Component comp = partObj.GetComponent<Component>();
+    //     
+    //     AddComponent(comp);
+    // }
+    //
+    // public void TestAddStaticBottom()
+    // {
+    //     GameObject partObj = buildLibrary.GetBuildObject(EPartName.StaticBottom);
+    //
+    //     Component comp = partObj.GetComponent<Component>();
+    //     
+    //     AddComponent(comp);
+    // }
+    //
+    // public void TestAddCubeBody()
+    // {
+    //     GameObject partObj = buildLibrary.GetBuildObject(EPartName.CubeBody);
+    //
+    //     Component comp = partObj.GetComponent<Component>();
+    //     
+    //     AddComponent(comp);
+    // }
+    //
+    // public void TestAddCannonArms()
+    // {
+    //     GameObject partObj = buildLibrary.GetBuildObject(EPartName.CannonArms);
+    //
+    //     Component comp = partObj.GetComponent<Component>();
+    //     
+    //     AddComponent(comp);
+    // }
+    //
+    // public void TestAddMeleeArms()
+    // {
+    //     GameObject partObj = buildLibrary.GetBuildObject(EPartName.MeleeArms);
+    //
+    //     Component comp = partObj.GetComponent<Component>();
+    //     
+    //     AddComponent(comp);
+    // }
 
 }
