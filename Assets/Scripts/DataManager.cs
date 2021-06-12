@@ -8,7 +8,11 @@ using UnityEngine;
 /// with the Data Manager it would be DataManager.MakeItRain<Player>(DataKeys.LOCALPLAYER).isInteracting.
 /// In order to achieve this, there are two steps:
 /// 1: Set up a data key entry to your class
-/// 2: Register the class to the data manager in your Awake() with DataManager.ToTheCloud(newDataKey, this). 
+/// 2: Register the class to the data manager in your Awake() with DataManager.ToTheCloud(newDataKey, this).
+///
+/// If you want to view variables during runtime that is on the Data Manager,
+/// on the top toolbar -> Tools -> Odin Inspector -> Static Inspector -> Select Type : DataManager.cs.
+/// From here it will display the information that is stored during the session.
 /// </summary>
 public static class DataManager
 {
