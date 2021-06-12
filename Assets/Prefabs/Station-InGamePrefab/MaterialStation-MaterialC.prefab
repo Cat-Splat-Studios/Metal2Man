@@ -139,7 +139,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.72
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0.20000003}
 --- !u!114 &7549608945435535374
 MonoBehaviour:
@@ -153,6 +153,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5c2ba0a2477e134f8fe3768d7e32ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlacementPosition: {fileID: 7428698453139820821}
   InteractRate: 1
   Prefab: {fileID: 704639221381008431, guid: daf1119effadfc0438521aaff8791530, type: 3}
-  Spawnpoint: {fileID: 7428698453139820821}
