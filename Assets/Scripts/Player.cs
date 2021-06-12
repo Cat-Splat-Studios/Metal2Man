@@ -40,8 +40,8 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        HandleMovement();
-        HandleRotation();
+        HandleMovement(); //handle movement is gunna handle rotation as well - unless we want twin stick mobility
+        //HandleRotation();
     }
 
    
@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
 
         //set our velocity to our input direction
         rb.velocity = MovementVector.normalized * PlayerSpeed;
+        transform.rotation = Quaternion.LookRotation(MovementVector.normalized);
 
     }
 
