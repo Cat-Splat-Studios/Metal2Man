@@ -35,6 +35,9 @@ public class Player : MonoBehaviour
     [SerializeField] PlayerController controller;
     [SerializeField] int playerIndex = 0;
 
+    [SerializeField] bool bIsTest = false;
+    [SerializeField] PlayerController controllerPrefab;
+
     private void Awake()
     {
         //input = GetComponent<PlayerInput>(); //make sure we have the component
@@ -55,20 +58,36 @@ public class Player : MonoBehaviour
         DataManager.ToTheCloud(gameObject.tag,this);
     }
 
+    private void Possess()
+    {
+        input = controller.PlayerInputs;
+
+        if (input == null)
+            input = controller.GetComponent<PlayerInput>();
+
+        input.actions["Move"].performed += UpdateMovementInput;
+        input.actions["Move"].canceled += UpdateMovementInput;
+
+        input.onActionTriggered += HandleInputs;
+
+        input.ActivateInput(); //enable the input 
+    }
+
     private void Start()
-    {        
+    {
+        if (bIsTest)
+        {
+            controller = Instantiate(controllerPrefab) as PlayerController;
+            Possess();
+            return;
+        }
+
         if (PlayerManager.IsPlayerInRange(playerIndex))
         {
             controller = PlayerManager.GetController(playerIndex);
             if (controller != null)
             {
-                input = controller.PlayerInputs;
-                input.actions["Move"].performed += UpdateMovementInput;
-                input.actions["Move"].canceled += UpdateMovementInput;
-
-                input.onActionTriggered += HandleInputs;
-
-                input.ActivateInput(); //enable the input 
+                Possess();
             }
         }
         else

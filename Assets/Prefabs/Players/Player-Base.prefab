@@ -110,7 +110,10 @@ MonoBehaviour:
   input: {fileID: 0}
   PlayerSpeed: 5
   HoldItemPosition: {fileID: 8711436694632167654}
+  controller: {fileID: 0}
   playerIndex: 0
+  bIsTest: 0
+  controllerPrefab: {fileID: 2527297464677462122, guid: e1272bb149f56574eb1f8fdcb80c507a, type: 3}
 --- !u!1001 &6151712307942051319
 PrefabInstance:
   m_ObjectHideFlags: 0
