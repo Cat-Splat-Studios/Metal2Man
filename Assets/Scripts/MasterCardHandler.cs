@@ -37,19 +37,19 @@ public class MasterCardHandler : MonoBehaviour
         {
             case EPartType.Arms:
                 if (armComp) return; //if we already have it dont do anyfing
-                component.transform.position = SetComponentWorldPos(Robo_Components[1].transform); //set compo to the set position on the canvas
+                component.transform.position = SetComponentWorldPos(Robo_Components[0].transform); //set compo to the set position on the canvas
                 armComp = component.gameObject;
                 break;
             
             case EPartType.Body:
                 if (bodyComp) return; //if we already have it dont do anyfing
-                component.transform.position = SetComponentWorldPos(Robo_Components[2].transform); //set compo to the set position on the canvas
+                component.transform.position = SetComponentWorldPos(Robo_Components[1].transform); //set compo to the set position on the canvas
                 bodyComp = component.gameObject;
                 break;
 
             case EPartType.Bottom:
                 if (bottomComp) return; //if we already have it dont do anyfing
-                component.transform.position = SetComponentWorldPos(Robo_Components[3].transform); //set compo to the set position on the canvas
+                component.transform.position = SetComponentWorldPos(Robo_Components[2].transform); //set compo to the set position on the canvas
                 bottomComp = component.gameObject;
                 break;
         }
@@ -61,7 +61,7 @@ public class MasterCardHandler : MonoBehaviour
         return newPos;
     }
 
-    public void ComponentRetrieved(int cardIndex, GameObject Component)
+    public void ComponentRetrieved(int cardIndex, GameObject Component) //this has been reworked
     {
           if (Robo_Components[cardIndex - 1] != null)
           {

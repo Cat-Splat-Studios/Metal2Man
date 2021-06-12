@@ -1929,8 +1929,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f908cbd5f5e22cb459704bdbcf70663f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partType: 0
-  partName: 3
+  partType: 2
+  partName: 0
 --- !u!1 &391895781 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 45c1f0df0343b974f86a7a43a4fb4130, type: 3}
@@ -5818,6 +5818,10 @@ PrefabInstance:
       propertyPath: testCube
       value: 
       objectReference: {fileID: 387995002}
+    - target: {fileID: 7491112054311951021, guid: 140a7f78a11c334418a77d032e529b7e, type: 3}
+      propertyPath: testComponent
+      value: 
+      objectReference: {fileID: 387995007}
     - target: {fileID: 7491112054311951021, guid: 140a7f78a11c334418a77d032e529b7e, type: 3}
       propertyPath: Robo_Components.Array.data[0]
       value: 
