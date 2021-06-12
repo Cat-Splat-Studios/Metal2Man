@@ -14,7 +14,7 @@ public class MenuHandler : MonoBehaviour
     [Header("Lobby Panel Stuff")]
     [SerializeField] PlayerLobbyInfo[] lobbyInfo;
     [SerializeField] TextMeshProUGUI playerCount;
-
+    public string LevelName = "Level1";
     private void Start()
     {
 
@@ -28,7 +28,7 @@ public class MenuHandler : MonoBehaviour
 
     public void OnStartButton()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene(LevelName);
     }
 
     public void OnQuitButton()
