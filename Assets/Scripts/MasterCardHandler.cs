@@ -13,24 +13,63 @@ public class MasterCardHandler : MonoBehaviour
     //big picture of final product
     public Image FinalDisplay;
 
-    public Image[] Req_Components = new Image[3];
+    public Image[] Robo_Components = new Image[3];
 
     public GameObject testCube;
 
+    private GameObject armComp = null;
+    private GameObject bodyComp = null;
+    private GameObject bottomComp = null;
+
+    public Component testComponent;
+
+
+    public float yOffset = 0.25f;
     private void Start()
     {
-        ComponentRetrieved(1, testCube);
+        //ComponentRetrieved(1, testCube);
+        AddComponentToUI(testComponent);
     }
 
+    public void AddComponentToUI(Component component)
+    {
+        switch (component.partType)
+        {
+            case EPartType.Arms:
+                if (armComp) return; //if we already have it dont do anyfing
+                component.transform.position = SetComponentWorldPos(Robo_Components[1].transform); //set compo to the set position on the canvas
+                armComp = component.gameObject;
+                break;
+            
+            case EPartType.Body:
+                if (bodyComp) return; //if we already have it dont do anyfing
+                component.transform.position = SetComponentWorldPos(Robo_Components[2].transform); //set compo to the set position on the canvas
+                bodyComp = component.gameObject;
+                break;
+
+            case EPartType.Bottom:
+                if (bottomComp) return; //if we already have it dont do anyfing
+                component.transform.position = SetComponentWorldPos(Robo_Components[3].transform); //set compo to the set position on the canvas
+                bottomComp = component.gameObject;
+                break;
+        }
+    }
+
+    private Vector3 SetComponentWorldPos(Transform ImageLocation)
+    {
+        Vector3 newPos = new Vector3(ImageLocation.position.x, ImageLocation.position.y + yOffset, ImageLocation.position.z);
+        return newPos;
+    }
 
     public void ComponentRetrieved(int cardIndex, GameObject Component)
     {
-       if (Req_Components[cardIndex-1] != null)
-       {
-            MaterialHandler.ImageColorChanger(Req_Components[cardIndex-1], Color.black);
+          if (Robo_Components[cardIndex - 1] != null)
+          {
+                MaterialHandler.ImageColorChanger(Robo_Components[cardIndex - 1], Color.black);
 
-            Vector3 componentPos = Req_Components[cardIndex - 1].transform.position;
-            testCube.transform.position = new Vector3(componentPos.x, componentPos.y + 0.55f, componentPos.z);
-       }
+                Vector3 componentPos = Robo_Components[cardIndex - 1].transform.position;
+                testCube.transform.position = new Vector3(componentPos.x, componentPos.y + 0.55f, componentPos.z);
+          }
+        
     }
 }
