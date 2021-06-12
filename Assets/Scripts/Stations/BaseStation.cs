@@ -14,13 +14,13 @@ public class BaseStation : MonoBehaviour
     public Transform PlacementPosition;
     public float InteractRate = 1;
     protected bool _canInteract;
-    
+    protected Player _currentPlayer;
     protected virtual void OnTriggerStay(Collider other)
     {
-	    if(other.CompareTag("Player"))
+	    if(other.tag.Contains("Player"))
 	    {
-		    bool isPressed = DataManager.MakeItRain<Player>(DataKeys.LOCALPLAYER).IsInteracting;
-		    if(isPressed)
+		    _currentPlayer = DataManager.MakeItRain<Player>(other.tag);
+		    if(_currentPlayer.IsInteracting)
 		    {
 			    StationAction();
 		    }

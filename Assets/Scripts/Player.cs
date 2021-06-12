@@ -49,7 +49,8 @@ public class Player : MonoBehaviour
         input.ActivateInput(); //enable the input 
         
         input.onActionTriggered += HandleInputs;
-        DataManager.ToTheCloud(DataKeys.LOCALPLAYER,this);
+        //ToDo - Need to make a Game Manager to create player instances then add them to the cloud with "Player" + index as the DataKey
+        DataManager.ToTheCloud(gameObject.tag,this);
     }
 
     public void ToggleInteractFlag()

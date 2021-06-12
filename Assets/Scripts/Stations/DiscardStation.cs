@@ -5,28 +5,24 @@ using UnityEngine;
 public class DiscardStation : BaseStation
 {
 	
-	private Player _player;
 	protected override void StationAction()
 	{
 		if(!_canInteract) return;
-		if(!_player)
+		
+		if(_currentPlayer.IsHoldingItem)
 		{
-			_player = DataManager.MakeItRain<Player>(DataKeys.LOCALPLAYER);
-		}
-
-		if(_player.IsHoldingItem)
-		{
-			var itemToKill = _player.HoldItemPosition.GetChild(0).gameObject;
+			_currentPlayer.IsHoldingItem = false;
+			var itemToKill = _currentPlayer.HoldItemPosition.GetChild(0).gameObject;
 
 			StartCoroutine(LerpObjectFromPlayer(itemToKill));
 		}
 	}
 
-	protected IEnumerator LerpObjectFromPlayer(GameObject objectToLerp)
+	private IEnumerator LerpObjectFromPlayer(GameObject objectToLerp)
 	{
 		objectToLerp.transform.position = PlacementPosition.position;
-		yield return new WaitForSeconds(1);
+		objectToLerp.transform.parent = PlacementPosition;
+		yield return new WaitForSeconds(0.5f);
 		Destroy(objectToLerp);
-		_player.IsHoldingItem = false;
 	}
 }
