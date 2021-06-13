@@ -44,7 +44,6 @@ public class RefineMaterialStation : BaseStation
             return;
         }
 
-        if(PlacementPosition.childCount > 0) return;
         if(_currentPlayer.HoldItemPosition.childCount == 0) return; 
         var type = _currentPlayer.HoldItemPosition.GetChild(0).GetComponent<MaterialItem>();
         if(!type) return;
