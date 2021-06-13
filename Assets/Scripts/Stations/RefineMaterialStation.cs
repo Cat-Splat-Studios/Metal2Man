@@ -10,6 +10,7 @@ using UnityEngine;
 //Should be WorkStation.cs
 public class RefineMaterialStation : BaseStation
 {
+    private TMPro.TMP_Text text;
     public WorkStationInfo InfoAsset;
     public List<Transform> MaterialPlacementPoints=new List<Transform>();
     private int _numOfCollectedMaterials;
@@ -19,9 +20,11 @@ public class RefineMaterialStation : BaseStation
     private bool _itemProcessed;
     private bool _itemPlaced;
     private bool _processing;
+    
     protected override void OnEnable()
     {
         base.OnEnable();
+        
         _currentOrderType = EOrderTypes.NULL;
     }
 
@@ -134,7 +137,14 @@ public class RefineMaterialStation : BaseStation
         {
             Destroy(_gameObject);
         }
-        yield return new WaitForSeconds(InfoAsset.ProcessDuration);
+        //I'm Sorry. But I'm tired
+        float duration = InfoAsset.ProcessDuration;
+        if(Animator)
+        {
+            Animator.SetBool("Building",true);
+            duration = Animator.GetCurrentAnimatorStateInfo(0).length;
+        }
+        yield return new WaitForSeconds(duration);
         var resultPrefab = Instantiate(_currentOrder.ProcessedResultPrefab, PlacementPosition.position,
             PlacementPosition.rotation);
         resultPrefab.transform.parent = PlacementPosition;

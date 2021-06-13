@@ -18,8 +18,6 @@ public class AssemblyTray : BaseStation
 
     public HudComponents hudComponents;
     public ScoreWave scoreWave;
-
-    public Animator anim;
     
     public UnityAction onOrderComplete;
 
@@ -95,7 +93,7 @@ public class AssemblyTray : BaseStation
         }
 
         player.IsHoldingItem = false;
-        anim.SetTrigger("Build");
+        Animator.SetTrigger("Build");
         CheckComponents();
     }
 

@@ -15,6 +15,7 @@ public class BaseStation : MonoBehaviour
     public float InteractRate = 1;
     protected bool _canInteract;
     protected Player _currentPlayer;
+    public Animator Animator;
     protected virtual void OnTriggerStay(Collider other)
     {
 	    if(other.tag.Contains("Player"))
