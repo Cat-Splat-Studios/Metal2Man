@@ -33,6 +33,8 @@ public class RefineMaterialStation : BaseStation
             if (PlacementPosition.childCount > 0)
             {
                 PlacementPosition.GetChild(0).GetComponent<Item>().GiveItem(_currentPlayer);
+                _processing = true;
+                StartCoroutine(DelayToPlaceItem());
                 return;
             }
         }
@@ -41,7 +43,9 @@ public class RefineMaterialStation : BaseStation
             _itemProcessed = false;
             return;
         }
-     
+
+        if(PlacementPosition.childCount > 0) return;
+        if(_currentPlayer.HoldItemPosition.childCount == 0) return; 
         var type = _currentPlayer.HoldItemPosition.GetChild(0).GetComponent<MaterialItem>();
         if(!type) return;
         _processing = true;
@@ -111,7 +115,7 @@ public class RefineMaterialStation : BaseStation
 
     IEnumerator DelayToPlaceItem()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.5f);
         _processing = false;
     }
 
