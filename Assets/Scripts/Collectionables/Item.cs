@@ -51,12 +51,12 @@ public class Item : MonoBehaviour
     {
         if(player.IsHoldingItem) return;
         
-        if(player.IsInteracting && !player.IsHoldingItem)
+        if(player.IsInteracting)
         {
             _inPlayerPossession = true;
             transform.parent = player.HoldItemPosition;
             transform.localPosition = Vector3.zero;
-            StartCoroutine(DelayToToggleFlag(player));
+            player.IsHoldingItem = true;
         }  
     }
 

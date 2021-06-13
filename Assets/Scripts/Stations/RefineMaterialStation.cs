@@ -27,13 +27,21 @@ public class RefineMaterialStation : BaseStation
 
     protected override void StationAction()
     {
-        if(!_currentPlayer.IsHoldingItem || _processing) return;
-        if(_currentPlayer.HoldItemPosition.childCount == 0) return;
+        if (_processing) return;
+        if (!_currentPlayer.IsHoldingItem)
+        {
+            if (PlacementPosition.childCount > 0)
+            {
+                PlacementPosition.GetChild(0).GetComponent<Item>().GiveItem(_currentPlayer);
+                return;
+            }
+        }
         if(_itemProcessed)
         {
             _itemProcessed = false;
             return;
         }
+     
         var type = _currentPlayer.HoldItemPosition.GetChild(0).GetComponent<MaterialItem>();
         if(!type) return;
         _processing = true;
