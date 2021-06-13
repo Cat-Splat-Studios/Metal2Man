@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
  * Rules for this station type set up:
@@ -20,12 +21,20 @@ public class RefineMaterialStation : BaseStation
     private bool _itemProcessed;
     private bool _itemPlaced;
     private bool _processing;
+
+    [SerializeField] Slider progressBar;
+    private float timeToReach; 
     
     protected override void OnEnable()
     {
         base.OnEnable();
         
         _currentOrderType = EOrderTypes.NULL;
+        progressBar = GetComponentInChildren<Slider>();
+        
+        if (progressBar)
+            progressBar.gameObject.SetActive(false);
+        
     }
 
     protected override void StationAction()
@@ -144,6 +153,14 @@ public class RefineMaterialStation : BaseStation
             Animator.SetBool("Building",true);
             duration = Animator.GetCurrentAnimatorStateInfo(0).length;
         }
+        //add a UI element that will signify duration of result
+        if (progressBar)
+        {
+            timeToReach = duration + Time.time;
+
+            InvokeRepeating("ProgressBar", duration, 0.1f);
+        }
+
         yield return new WaitForSeconds(duration);
         var resultPrefab = Instantiate(_currentOrder.ProcessedResultPrefab, PlacementPosition.position,
             PlacementPosition.rotation);
@@ -152,5 +169,16 @@ public class RefineMaterialStation : BaseStation
         _currentOrder = null;
         _currentOrderType = EOrderTypes.NULL;
         _itemProcessed = true;
+    }
+
+    void ProgressBar()
+    {
+        progressBar.gameObject.SetActive(true);
+
+        if (Time.time <= timeToReach)
+        {
+            //value needs to be an algorithm for the current time step to the value of the time to reach
+            progressBar.value = Mathf.Clamp((timeToReach / Time.time), 0, 1);
+        }
     }
 }
