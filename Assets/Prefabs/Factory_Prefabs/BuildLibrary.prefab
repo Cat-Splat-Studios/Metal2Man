@@ -47,16 +47,16 @@ MonoBehaviour:
   - name: 1
     part:
       image: {fileID: 21300000, guid: 3ae27d0dad90c9c478005f47e816aa58, type: 3}
-      prefab: {fileID: 0}
+      prefab: {fileID: 3406122253687583029, guid: f1e549dc40da61544baed0724f0b17c7, type: 3}
   - name: 2
     part:
       image: {fileID: 21300000, guid: 030059ebc5331f3468f5820093c08e33, type: 3}
-      prefab: {fileID: 0}
+      prefab: {fileID: 1963974094393220912, guid: abb931e12edca044495e8b8b5459a835, type: 3}
   - name: 3
     part:
       image: {fileID: 21300000, guid: 2b8482ccd66e2074fb3bdd982d0f36da, type: 3}
-      prefab: {fileID: 0}
+      prefab: {fileID: 5782343110674852065, guid: 0fbb8de7afd50ac4b97d357f9821b4d0, type: 3}
   - name: 4
     part:
       image: {fileID: 21300000, guid: dbccfbf5d0453674b87d7d905bc394aa, type: 3}
-      prefab: {fileID: 0}
+      prefab: {fileID: 4292572288516902235, guid: 1cd82da044a8bee439c35df666556fcb, type: 3}

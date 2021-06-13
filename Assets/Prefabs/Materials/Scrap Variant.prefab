@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1078953860400176608, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: af38051bbba49c840a266bd3bfd25040, type: 2}
+      objectReference: {fileID: 2100000, guid: a542eaea9887ae3449432c8c200373e2, type: 2}
     - target: {fileID: 2094750336299640952, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_Name
       value: Scrap Variant
@@ -33,15 +33,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4283029410219354756, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.2005544
+      value: -5.1275706
       objectReference: {fileID: 0}
     - target: {fileID: 4283029410219354756, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000023841858
+      value: 0.0084478455
       objectReference: {fileID: 0}
     - target: {fileID: 4283029410219354756, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.2059574
+      value: -2.5825415
       objectReference: {fileID: 0}
     - target: {fileID: 4283029410219354756, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_LocalRotation.w

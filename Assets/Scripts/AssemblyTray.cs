@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using Random = UnityEngine.Random;
 
-public class AssemblyTray : MonoBehaviour
+public class AssemblyTray : BaseStation
 {
     public GameObject robotPrefab;
     public Transform buildArea;
@@ -30,7 +30,7 @@ public class AssemblyTray : MonoBehaviour
     
     public bool isLeft = false;
 
-    public void AddComponent(Component component)
+    public void AddComponent(Component component, Player player)
     {
         switch (component.partType)
         {
@@ -40,10 +40,11 @@ public class AssemblyTray : MonoBehaviour
                     BuildError();
                     return;
                 }
-                GameObject weaponObj = Instantiate(buildLibrary.GetBuildObject(component.partName),
-                    weaponArea.position, Quaternion.identity);
-                weaponObj.transform.parent = weaponArea;
-                weaponComp = weaponObj;
+                
+                component.transform.position = weaponArea.position;
+                component.transform.rotation = weaponArea.rotation;
+                component.transform.parent = weaponArea;
+                weaponComp = component.gameObject;
                 if (isLeft)
                 {
                     hudComponents.removeCardLeftSection(component.partName);
@@ -59,10 +60,10 @@ public class AssemblyTray : MonoBehaviour
                     BuildError();
                     return;
                 }
-                GameObject bodyObj = Instantiate(buildLibrary.GetBuildObject(component.partName),
-                    bodyArea.position, Quaternion.identity);
-                bodyObj.transform.parent = bodyArea;
-                bodyComp = bodyObj;
+                component.transform.position = bodyArea.position;
+                component.transform.rotation = bodyArea.rotation;
+                component.transform.parent = bodyArea;
+                bodyComp = component.gameObject;
                 if (isLeft)
                 {
                     hudComponents.removeCardLeftSection(component.partName);
@@ -78,10 +79,10 @@ public class AssemblyTray : MonoBehaviour
                     BuildError();
                     return;
                 }
-                GameObject circuitObj = Instantiate(buildLibrary.GetBuildObject(component.partName),
-                    circuitArea.position, Quaternion.identity);
-                circuitObj.transform.parent = circuitArea;
-                circuitBoard = circuitObj;
+                component.transform.position = circuitArea.position;
+                component.transform.rotation = circuitArea.rotation;
+                component.transform.parent = circuitArea;
+                circuitBoard = component.gameObject;
                 if (isLeft)
                 {
                     hudComponents.removeCardLeftSection(component.partName);
@@ -92,9 +93,25 @@ public class AssemblyTray : MonoBehaviour
                 }
                 break;
         }
-        
+
+        player.IsHoldingItem = false;
         anim.SetTrigger("Build");
         CheckComponents();
+    }
+
+    protected override void StationAction()
+    {
+        if (_currentPlayer.IsHoldingItem)
+        {
+            Debug.Log("Holding item");
+            Component comp = _currentPlayer.HoldItemPosition.GetChild(0).GetComponent<Component>();
+
+            if (comp)
+            {
+                Debug.Log("Have Component item");
+                AddComponent(comp, _currentPlayer);
+            }
+        }
     }
     
     public void SetCurrentOrder(Order order)
@@ -175,39 +192,39 @@ public class AssemblyTray : MonoBehaviour
     
     
     
-    public void TestAddRangeWeapon()
-    {
-        GameObject partObj = buildLibrary.GetBuildObject(EPartName.RangeWeapon);
-    
-        Component comp = partObj.GetComponent<Component>();
-        
-        AddComponent(comp);
-    }
-    
-    public void TestAddMeleeWeapon()
-    {
-        GameObject partObj = buildLibrary.GetBuildObject(EPartName.MeleeWeapon);
-    
-        Component comp = partObj.GetComponent<Component>();
-        
-        AddComponent(comp);
-    }
-    
-    public void TestAddBody()
-    {
-        GameObject partObj = buildLibrary.GetBuildObject(EPartName.MobileBody);
-    
-        Component comp = partObj.GetComponent<Component>();
-        
-        AddComponent(comp);
-    }
-    
-    public void TestAddCircuit()
-    {
-        GameObject partObj = buildLibrary.GetBuildObject(EPartName.CircuitBoard);
-    
-        Component comp = partObj.GetComponent<Component>();
-        
-        AddComponent(comp);
-    }
+    // public void TestAddRangeWeapon()
+    // {
+    //     GameObject partObj = buildLibrary.GetBuildObject(EPartName.RangeWeapon);
+    //
+    //     Component comp = partObj.GetComponent<Component>();
+    //     
+    //     AddComponent(comp);
+    // }
+    //
+    // public void TestAddMeleeWeapon()
+    // {
+    //     GameObject partObj = buildLibrary.GetBuildObject(EPartName.MeleeWeapon);
+    //
+    //     Component comp = partObj.GetComponent<Component>();
+    //     
+    //     AddComponent(comp);
+    // }
+    //
+    // public void TestAddBody()
+    // {
+    //     GameObject partObj = buildLibrary.GetBuildObject(EPartName.MobileBody);
+    //
+    //     Component comp = partObj.GetComponent<Component>();
+    //     
+    //     AddComponent(comp);
+    // }
+    //
+    // public void TestAddCircuit()
+    // {
+    //     GameObject partObj = buildLibrary.GetBuildObject(EPartName.CircuitBoard);
+    //
+    //     Component comp = partObj.GetComponent<Component>();
+    //     
+    //     AddComponent(comp);
+    // }
 }

@@ -60,6 +60,25 @@ Transform:
   m_Father: {fileID: 383365005415742557}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &3081641566704919458
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1063896114866582109}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ea0d2d626fd529b44abce14314ee72f1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4460265716120427671
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0cd2873387823249a8272e72fa11f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlacementPosition: {fileID: 0}
+  InteractRate: 1
   robotPrefab: {fileID: 0}
   buildArea: {fileID: 1635061795905790146}
   weaponArea: {fileID: 4785613819014879853}
@@ -175,8 +196,8 @@ MonoBehaviour:
   currentOrder: {fileID: 0}
   hudComponents: {fileID: 0}
   scoreWave: {fileID: 0}
-  anim: {fileID: 0}
-  isLeft: 0
+  anim: {fileID: 3081641566704919458}
+  isLeft: 1
 --- !u!1 &8074804303413149662
 GameObject:
   m_ObjectHideFlags: 0
@@ -298,6 +319,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b872cb71d992a2449c77b908dff7cac, type: 3}
+--- !u!1 &1063896114866582109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 8b872cb71d992a2449c77b908dff7cac, type: 3}
+  m_PrefabInstance: {fileID: 144922439267602188}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &398682150355478759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8b872cb71d992a2449c77b908dff7cac, type: 3}

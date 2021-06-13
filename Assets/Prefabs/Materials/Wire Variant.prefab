@@ -14,7 +14,7 @@ PrefabInstance:
     - target: {fileID: 1078953860400176608, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 55587078ec9b8544ba57d59c70903369, type: 2}
+      objectReference: {fileID: 2100000, guid: 3eaf55df4072cb942bd8ab6c9576ff18, type: 2}
     - target: {fileID: 2094750336299640952, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_Name
       value: Wire Variant
@@ -37,15 +37,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4283029410219354756, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.5937943
+      value: -4.4749174
       objectReference: {fileID: 0}
     - target: {fileID: 4283029410219354756, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.625
+      value: 0.030245528
       objectReference: {fileID: 0}
     - target: {fileID: 4283029410219354756, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.0596797
+      value: -1.9784272
       objectReference: {fileID: 0}
     - target: {fileID: 4283029410219354756, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_LocalRotation.w
