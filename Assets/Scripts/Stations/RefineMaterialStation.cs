@@ -167,6 +167,7 @@ public class RefineMaterialStation : BaseStation
         resultPrefab.transform.parent = PlacementPosition;
         _numOfCollectedMaterials = 0;
         _currentOrder = null;
+        DataManager.MakeItRain<ScoreHandler>(DataKeys.SCORE).AddToScore(_currentOrderType);
         _currentOrderType = EOrderTypes.NULL;
         _itemProcessed = true;
     }
