@@ -18,6 +18,8 @@ public class AssemblyTray : MonoBehaviour
 
     public HudComponents hudComponents;
     public ScoreWave scoreWave;
+
+    public Animator anim;
     
     public UnityAction onOrderComplete;
 
@@ -91,6 +93,7 @@ public class AssemblyTray : MonoBehaviour
                 break;
         }
         
+        anim.SetTrigger("Build");
         CheckComponents();
     }
     
@@ -159,7 +162,7 @@ public class AssemblyTray : MonoBehaviour
     
     private void BuildRobot() //This is more or less, we have finished our order -> start a new one 
     {
-      //  Instantiate(currentOrder.robotPrefab, buildArea.position, Quaternion.identity);
+        //  Instantiate(currentOrder.robotPrefab, buildArea.position, Quaternion.identity);
         RemoveComponents();
         scoreWave.ReduceWave(5);
         onOrderComplete.Invoke();

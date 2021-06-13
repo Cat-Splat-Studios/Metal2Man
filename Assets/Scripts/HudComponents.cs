@@ -46,8 +46,13 @@ public class HudComponents : MonoBehaviour
     public void removeCardRightSection(EPartName partName)
     {
         ComponentCard componentCard = rightSectionComponents.Find((card) => card.partName == partName);
-        rightSectionComponents.Remove(componentCard);
-        componentCard.HideCard();
+        if (componentCard)
+        {
+            Debug.Log("REMOVE" + componentCard.partName);
+            rightSectionComponents.Remove(componentCard);
+            componentCard.HideCard();
+        }
+       
         
     }
 

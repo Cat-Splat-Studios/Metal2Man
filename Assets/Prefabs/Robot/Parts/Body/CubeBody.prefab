@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f908cbd5f5e22cb459704bdbcf70663f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  partType: 2
+  partType: 1
   partName: 3
 --- !u!54 &-2235695548829184309
 Rigidbody:
