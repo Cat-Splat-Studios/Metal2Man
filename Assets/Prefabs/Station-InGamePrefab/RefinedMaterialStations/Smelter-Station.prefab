@@ -286,6 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlacementPosition: {fileID: 6116755723155405616}
   InteractRate: 0
+  Animator: {fileID: 0}
   InfoAsset: {fileID: 11400000, guid: 93e755a9c39d35746bac370d4c2130a8, type: 2}
   MaterialPlacementPoints:
   - {fileID: 6116755723155405616}
@@ -300,5 +301,5 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.53
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 0.2
+  m_Center: {x: 0, y: 0.33, z: 0}
