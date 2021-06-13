@@ -89,6 +89,8 @@ public class Player : MonoBehaviour
         input.onActionTriggered += HandleInputs;
 
         input.ActivateInput(); //enable the input 
+
+        PlayerManager.StorePlayer(this);
     }
 
     private void Start()

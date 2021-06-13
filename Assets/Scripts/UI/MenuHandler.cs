@@ -62,6 +62,7 @@ public class MenuHandler : MonoBehaviour
         playerCount.text = inputManager.playerCount.ToString() + "/" +
             inputManager.maxPlayerCount.ToString() + " Joined";
     } 
+   
 
     public void SetSelected(GameObject gameobject)
     {
