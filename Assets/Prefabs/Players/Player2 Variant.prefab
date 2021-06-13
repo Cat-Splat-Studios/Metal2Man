@@ -7,9 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5973278340811498281, guid: b8f3befd3f755fc4493f54c9a000a526, type: 3}
+      propertyPath: DashSpeed
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 5973278340811498284, guid: b8f3befd3f755fc4493f54c9a000a526, type: 3}
       propertyPath: m_Name
-      value: Player2
+      value: Player2 Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5973278340811498284, guid: b8f3befd3f755fc4493f54c9a000a526, type: 3}
       propertyPath: m_TagString

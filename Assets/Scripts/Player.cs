@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     public PlayerInput input;
 
     public float PlayerSpeed;
+    public float DashSpeed = 50;
+
     public Transform HoldItemPosition;
     Vector2 inputVector_L; //left stick
     Vector2 inputVector_R; //left stick
@@ -53,7 +55,12 @@ public class Player : MonoBehaviour
             PlayerSpeed = 5.0f;
             Debug.Log("speed wasnt set defaulting to: " + PlayerSpeed);
         }
-       
+        if (DashSpeed <= 0)
+        {
+            DashSpeed = 5.0f;
+            Debug.Log("dash speed wasnt set defaulting to: " + DashSpeed);
+        }
+
         //ToDo - Need to make a Game Manager to create player instances then add them to the cloud with "Player" + index as the DataKey
         DataManager.ToTheCloud(gameObject.tag,this);
     }
@@ -69,13 +76,14 @@ public class Player : MonoBehaviour
         {
             input.actions["Move1"].performed += UpdateMovementInput;
             input.actions["Move1"].canceled += UpdateMovementInput;
-            
-            input.onActionTriggered += HandleInputs;
+
         }
         else
         {
             input.actions["Move"].performed += UpdateMovementInput;
             input.actions["Move"].canceled += UpdateMovementInput;
+
+           // input.onActionTriggered += HandleInputs;
         }
 
         input.onActionTriggered += HandleInputs;
@@ -115,6 +123,11 @@ public class Player : MonoBehaviour
             Debug.Log("Controller not found, should be disabling this");
             gameObject.SetActive(false);
         }
+
+
+        //no idea what fookin happened to the rb but mass is 50 and i cant find this prefab in proj??? sooo here we go
+        rb.mass = 1;
+        DashSpeed = 35;
     }
 
     private void FixedUpdate()
@@ -168,7 +181,11 @@ public class Player : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
         }
     }
-
+    private void PlayerDash()
+    {
+        Debug.Log("dash boi");
+        rb.AddForce(transform.forward * DashSpeed, ForceMode.Impulse);
+    }
     //we can do it in a switch - but movement should be seperate
     private void HandleInputs(InputAction.CallbackContext context)
     {
@@ -179,12 +196,23 @@ public class Player : MonoBehaviour
                 ToggleInteractFlag();
                 return;
             }
+
+            if (context.action.name == "Dash1")
+            {
+                if (context.action.phase == InputActionPhase.Performed)
+                PlayerDash();
+                return;
+            }
         }
 
         switch (context.action.name)
         {
             case "Interact":                
                 ToggleInteractFlag();
+                break;
+            case "Dash":
+                if (context.action.phase == InputActionPhase.Performed)
+                    PlayerDash();
                 break;
         }
     }
