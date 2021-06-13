@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 163222330506616914, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7cd1b7ecc8872b04a900274b864ed5c0, type: 3}
+    - target: {fileID: 426340796093246438, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6d02ecf230e14dd44b40146af537492a, type: 3}
     - target: {fileID: 4947899323666406753, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_Name
       value: MobileBody
@@ -99,6 +107,10 @@ PrefabInstance:
       propertyPath: partName
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 8017293385304303560, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2dee143d78c7e0b4f9a7bd2480740c75, type: 3}
     - target: {fileID: 8672235052514346549, guid: 84a38fbaa3844a040a0945d0598a5695, type: 3}
       propertyPath: m_Sprite
       value: 
