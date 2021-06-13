@@ -24,11 +24,12 @@ public class MenuHandler : MonoBehaviour
 
     [SerializeField] InputAction SecondPlayerButton;
 
-
     private void Start()
     {
         SecondPlayerButton.Enable();
         SecondPlayerButton.performed += ManualJoinPlayer;
+
+        //lobbyInfo[0].UpdateInfo(controller.PlayerInputs);
     }
 
     private void OnDestroy()
@@ -41,23 +42,31 @@ public class MenuHandler : MonoBehaviour
     {        
         controller.AllowSplitKeyboard();
 
-        //GameObject temp = Instantiate(inputManager.playerPrefab);
-        //PlayerInput inputs = temp.GetComponent<PlayerInput>();
-        //inputs.defaultActionMap = "SplitKeyboard";
-        //inputs.SwitchCurrentControlScheme(Keyboard.current);
-        //inputs.SwitchCurrentActionMap("SplitKeyboard");
+        for(int i = 0; i < lobbyInfo.Length; i++)
+        {
+            if (i == 1 && PlayerManager.GetIsSplitKeyboard) 
+            {
+                lobbyInfo[i].UpdateInfo(controller, true);
+            }
+
+            lobbyInfo[i].UpdateInfo(PlayerManager.GetController(i));
+        }
 
         SecondPlayerButton.performed -= ManualJoinPlayer;
-
-        //InputUser.PerformPairingWithDevice(Keyboard.current, inputs.user);
     }
 
     public void OnPlayerJoined(PlayerInput input)
     {
-        Debug.Log("Player has joined");
-        Instantiate(input.gameObject);
-        playerCount.text = input.playerIndex + " /2 Players Joined";
+        Debug.Log("Menu Handler: Player Index on join is: " + input.playerIndex);
+        lobbyInfo[input.playerIndex].UpdateInfo(input);
+        playerCount.text = inputManager.playerCount.ToString() + "/" +
+            inputManager.maxPlayerCount.ToString() + " Joined";
     } 
+
+    public void SetSelected(GameObject gameobject)
+    {
+        UnityEngine.EventSystems.EventSystem.current.SetSelectedGameObject(gameobject);
+    }
 
     public void OnStartButton()
     {
