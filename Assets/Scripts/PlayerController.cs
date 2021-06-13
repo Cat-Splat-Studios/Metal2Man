@@ -14,13 +14,17 @@ public class PlayerController : MonoBehaviour
     private PlayerInput splitKeyboardInputs;
     public PlayerInput SplitKeyboard => splitKeyboardInputs;
 
-    private void Start()
+    private void Awake()
     {
         DontDestroyOnLoad(gameObject);
         playerInputs = GetComponent<PlayerInput>();
         PlayerManager.AddPlayer(this);
 
         PlayerInputs.onDeviceLost += DebugDeviceLost;
+    }
+    private void Start()
+    {
+
     }
 
     private void DebugDeviceLost(PlayerInput obj)
