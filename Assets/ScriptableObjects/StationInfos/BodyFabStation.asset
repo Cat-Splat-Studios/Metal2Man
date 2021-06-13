@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6a7a0acf8d853494995ccd872755a9e4, type: 3}
-  m_Name: SmelterStation
+  m_Name: BodyFabStation
   m_EditorClassIdentifier: 
   Orders:
-  - RequiredMaterials: 00000000
-    ProcessedResultPrefab: {fileID: 5890722822040397706, guid: b7c7b9b038ec3b246817c723c4f9d6d6, type: 3}
-    OrderType: 0
-  ProcessDuration: 0.5
+  - RequiredMaterials: 040000000100000003000000
+    ProcessedResultPrefab: {fileID: 5782343110674852065, guid: 0fbb8de7afd50ac4b97d357f9821b4d0, type: 3}
+    OrderType: 5
+  ProcessDuration: 1

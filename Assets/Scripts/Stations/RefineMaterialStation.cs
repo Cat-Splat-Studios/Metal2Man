@@ -7,24 +7,27 @@ using UnityEngine;
  * - Orders cannot share the same material type within the InfoAsset
  * - Once an item is placed, that order has to be filled in order to clear the smelter
  */
+//Should be WorkStation.cs
 public class RefineMaterialStation : BaseStation
 {
     public WorkStationInfo InfoAsset;
     public List<Transform> MaterialPlacementPoints=new List<Transform>();
     private int _numOfCollectedMaterials;
-    private EMaterialTypes _currentOrderType;
+    private EOrderTypes _currentOrderType;
     private WorkOrder _currentOrder;
     private List<GameObject> _collectedMaterials=new List<GameObject>();
     private bool _itemProcessed;
+    private bool _itemPlaced;
+    private bool _processing;
     protected override void OnEnable()
     {
         base.OnEnable();
-        _currentOrderType = EMaterialTypes.NULL;
+        _currentOrderType = EOrderTypes.NULL;
     }
 
     protected override void StationAction()
     {
-        if(!_currentPlayer.IsHoldingItem) return;
+        if(!_currentPlayer.IsHoldingItem || _processing) return;
         if(_currentPlayer.HoldItemPosition.childCount == 0) return;
         if(_itemProcessed)
         {
@@ -33,40 +36,72 @@ public class RefineMaterialStation : BaseStation
         }
         var type = _currentPlayer.HoldItemPosition.GetChild(0).GetComponent<MaterialItem>();
         if(!type) return;
-        
-        for(int i = 0; i < InfoAsset.Orders.Count; i++)
+        _processing = true;
+
+        if(_currentOrder != null)
         {
-            for(int j = 0; j < InfoAsset.Orders[i].RequiredMaterials.Count;j++)
+            for(int i = 0; i < _currentOrder.RequiredMaterials.Count;i++)
             {
-                if(type.MaterialType == InfoAsset.Orders[i].RequiredMaterials[j])
+                if(type.MaterialType == _currentOrder.RequiredMaterials[i])
                 {
                     //Add item to this order
-                    if(_currentOrderType == EMaterialTypes.NULL || _currentOrderType == InfoAsset.Orders[i].OrderType)
+                    _currentPlayer.IsHoldingItem = false;
+                    _itemPlaced = true;
+                    type.gameObject.transform.position = MaterialPlacementPoints[_numOfCollectedMaterials].position;
+                    type.gameObject.transform.parent = MaterialPlacementPoints[_numOfCollectedMaterials];
+                    _numOfCollectedMaterials++;
+                    _collectedMaterials.Add(type.gameObject);
+                    if(_numOfCollectedMaterials >= _currentOrder.RequiredMaterials.Count)
                     {
+                        StartCoroutine(DelayToSpawnResult());
+                    }
+                    break;
+                }
+            }
+        }
+        else
+        {
+            for(int i = 0; i < InfoAsset.Orders.Count; i++)
+            {
+                for(int j = 0; j < InfoAsset.Orders[i].RequiredMaterials.Count;j++)
+                {
+                    if(type.MaterialType == InfoAsset.Orders[i].RequiredMaterials[j])
+                    {
+                        //Add item to this order
                         _currentPlayer.IsHoldingItem = false;
+                        _itemPlaced = true;
                         type.gameObject.transform.position = MaterialPlacementPoints[_numOfCollectedMaterials].position;
                         type.gameObject.transform.parent = MaterialPlacementPoints[_numOfCollectedMaterials];
                         _numOfCollectedMaterials++;
                         _collectedMaterials.Add(type.gameObject);
-                        if(_currentOrderType == EMaterialTypes.NULL)
-                        {
-                            _currentOrderType = InfoAsset.Orders[i].OrderType;
-                            _currentOrder = InfoAsset.Orders[i];
-                        }
+                        _currentOrderType = InfoAsset.Orders[i].OrderType;
+                        _currentOrder = InfoAsset.Orders[i];
                         if(_numOfCollectedMaterials >= _currentOrder.RequiredMaterials.Count)
                         {
                             StartCoroutine(DelayToSpawnResult());
-                            break;
                         }
+                        break;
                     }
                 }
-                //Wrong item for order
-                else
-                {
-                    StartCoroutine(DelayToReturnItem(type.gameObject));
-                }
-            }    
+
+                if(_itemPlaced) break;
+            }
         }
+        
+        
+        //Wrong Item Placed
+        if(!_itemPlaced)
+        {
+            StartCoroutine(DelayToReturnItem(type.gameObject));
+        }
+        _itemPlaced = false;
+        StartCoroutine(DelayToPlaceItem());
+    }
+
+    IEnumerator DelayToPlaceItem()
+    {
+        yield return new WaitForSeconds(0.25f);
+        _processing = false;
     }
 
     IEnumerator DelayToReturnItem(GameObject go)
@@ -89,7 +124,7 @@ public class RefineMaterialStation : BaseStation
         Instantiate(_currentOrder.ProcessedResultPrefab, PlacementPosition.position, PlacementPosition.rotation);
         _numOfCollectedMaterials = 0;
         _currentOrder = null;
-        _currentOrderType = EMaterialTypes.NULL;
+        _currentOrderType = EOrderTypes.NULL;
         _itemProcessed = true;
     }
 }

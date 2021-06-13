@@ -15,5 +15,5 @@ public class WorkOrder
 {
     public List<EMaterialTypes> RequiredMaterials;
     public GameObject ProcessedResultPrefab;
-    public EMaterialTypes OrderType;
+    public EOrderTypes OrderType;
 }

@@ -15,8 +15,8 @@ MonoBehaviour:
   Orders:
   - RequiredMaterials: 0400000001000000
     ProcessedResultPrefab: {fileID: 3406122253687583029, guid: f1e549dc40da61544baed0724f0b17c7, type: 3}
-    OrderType: 0
+    OrderType: 3
   - RequiredMaterials: 0400000005000000
     ProcessedResultPrefab: {fileID: 1963974094393220912, guid: abb931e12edca044495e8b8b5459a835, type: 3}
-    OrderType: 0
+    OrderType: 4
   ProcessDuration: 1

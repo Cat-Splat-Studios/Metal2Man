@@ -14,12 +14,16 @@ public enum EMaterialTypes
     NULL=20
 }
 
-public enum ERobotParts
+public enum EOrderTypes
 {
+    Metal,
+    Ammo,
+    PrintedSilicon,
     MeleeWeapon,
     RangedWeapon,
     MobileBody,
-    CircuitBoard
+    CircuitBoard,
+    NULL=20
 }
 
 public class Item : MonoBehaviour
