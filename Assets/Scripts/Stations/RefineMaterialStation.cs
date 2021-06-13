@@ -82,9 +82,12 @@ public class RefineMaterialStation : BaseStation
                         type.gameObject.transform.parent = MaterialPlacementPoints[_numOfCollectedMaterials];
                         _numOfCollectedMaterials++;
                         _collectedMaterials.Add(type.gameObject);
-                        _currentOrderType = InfoAsset.Orders[i].OrderType;
-                        _currentOrder = InfoAsset.Orders[i];
-                        if(_numOfCollectedMaterials >= _currentOrder.RequiredMaterials.Count)
+                        if(type.MaterialType != EMaterialTypes.Metal)
+                        {
+                            _currentOrderType = InfoAsset.Orders[i].OrderType;
+                            _currentOrder = InfoAsset.Orders[i];   
+                        }
+                        if(_currentOrder!=null && _numOfCollectedMaterials >= _currentOrder.RequiredMaterials.Count)
                         {
                             StartCoroutine(DelayToSpawnResult());
                         }

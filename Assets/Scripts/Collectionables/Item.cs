@@ -54,9 +54,9 @@ public class Item : MonoBehaviour
         if(player.IsInteracting)
         {
             _inPlayerPossession = true;
+            transform.position = player.HoldItemPosition.position;
             transform.parent = player.HoldItemPosition;
-            transform.localPosition = Vector3.zero;
-            player.IsHoldingItem = true;
+            StartCoroutine(DelayToToggleFlag(player));
         }  
     }
 
