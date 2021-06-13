@@ -8556,6 +8556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlacementPosition: {fileID: 0}
   InteractRate: 1
+  Animator: {fileID: 0}
   robotPrefab: {fileID: 0}
   buildArea: {fileID: 635095648146641348}
   weaponArea: {fileID: 6631922374306343787}
@@ -8565,7 +8566,6 @@ MonoBehaviour:
   currentOrder: {fileID: 11400000, guid: a466f1824d1acfc4a9f74510d67ea2a5, type: 2}
   hudComponents: {fileID: 5977631731387759079}
   scoreWave: {fileID: 6108442021922993401}
-  anim: {fileID: 3793306902447641252}
   isLeft: 0
 --- !u!65 &6966160687641405584
 BoxCollider:
@@ -8643,6 +8643,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlacementPosition: {fileID: 0}
   InteractRate: 1
+  Animator: {fileID: 3793306903447188666}
   robotPrefab: {fileID: 0}
   buildArea: {fileID: 635095649288796122}
   weaponArea: {fileID: 6631922375440125301}
@@ -8652,7 +8653,6 @@ MonoBehaviour:
   currentOrder: {fileID: 11400000, guid: 088b72a93ccaade4e9ffcaf05fba0b4c, type: 2}
   hudComponents: {fileID: 5977631731387759079}
   scoreWave: {fileID: 6108442021922993401}
-  anim: {fileID: 3793306903447188666}
   isLeft: 1
 --- !u!65 &2842931790908366690
 BoxCollider:
