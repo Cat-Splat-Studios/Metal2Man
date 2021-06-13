@@ -129,7 +129,9 @@ public class RefineMaterialStation : BaseStation
             Destroy(_gameObject);
         }
         yield return new WaitForSeconds(InfoAsset.ProcessDuration);
-        Instantiate(_currentOrder.ProcessedResultPrefab, PlacementPosition.position, PlacementPosition.rotation);
+        var resultPrefab = Instantiate(_currentOrder.ProcessedResultPrefab, PlacementPosition.position,
+            PlacementPosition.rotation);
+        resultPrefab.transform.parent = PlacementPosition;
         _numOfCollectedMaterials = 0;
         _currentOrder = null;
         _currentOrderType = EOrderTypes.NULL;
