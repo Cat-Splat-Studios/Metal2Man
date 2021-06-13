@@ -15,7 +15,7 @@ MonoBehaviour:
   robotName: Turret Robot
   robotPrefab: {fileID: 0}
   buildTime: 120
-  robotImage: {fileID: 21300000, guid: e1ee932bdae74334db0d4db702e5ab71, type: 3}
+  robotImage: {fileID: 21300000, guid: 5cfc313b643bdc3409b85137b476363d, type: 3}
   components:
   - type: 0
     name: 2
