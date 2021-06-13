@@ -7,21 +7,37 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1783941043832542073, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4147924169427586248, guid: c64363402b21e93428029b934b2d9bee, type: 3}
     - target: {fileID: 4732449391904878579, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4732449391904878579, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4732449391904878579, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4732449391904878579, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4732449391904878579, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.2735438
+      value: -5.2400246
       objectReference: {fileID: 0}
     - target: {fileID: 4732449391904878579, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.877856
+      value: 0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: 4732449391904878579, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.3427286
+      value: 1.7962992
       objectReference: {fileID: 0}
     - target: {fileID: 4732449391904878579, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}
       propertyPath: m_LocalRotation.w
@@ -51,9 +67,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4832411054797044334, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832411054797044334, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4832411054797044334, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7480309101095365903, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}
       propertyPath: m_Name
-      value: MaterialItemB
+      value: Bolt Variant
       objectReference: {fileID: 0}
     - target: {fileID: 8214950032862621065, guid: 87fbd457c70598d4d88b6bd93e392420, type: 3}
       propertyPath: MaterialType

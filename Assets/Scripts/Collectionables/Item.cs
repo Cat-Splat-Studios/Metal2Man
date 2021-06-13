@@ -29,7 +29,6 @@ public enum EOrderTypes
 public class Item : MonoBehaviour
 {
     protected bool _inPlayerPossession;
-    protected Collider _collider;
     protected bool _isActive;
 
     public bool IsActive
@@ -42,34 +41,23 @@ public class Item : MonoBehaviour
         get => _inPlayerPossession;
         set => _inPlayerPossession = value;
     }
-
-    protected virtual void Awake()
-    {
-        _collider = GetComponent<Collider>();
-    }
-
+    
     private void OnEnable()
     {
         StartCoroutine(DelayToGrabItem());
     }
 
-    private void OnTriggerStay(Collider other)
+    public void GiveItem(Player player)
     {
-        if(!_isActive) return;
-        if(other.tag.Contains("Player"))
+        if(player.IsHoldingItem) return;
+        
+        if(player.IsInteracting && !player.IsHoldingItem)
         {
-            Player player = DataManager.MakeItRain<Player>(other.tag);
-            if(player.IsHoldingItem) return;
-            
-            if(player.IsInteracting && !player.IsHoldingItem)
-            {
-                _inPlayerPossession = true;
-                _collider.enabled = false;
-                transform.parent = player.HoldItemPosition;
-                transform.localPosition = Vector3.zero;
-                StartCoroutine(DelayToToggleFlag(player));
-            }    
-        }
+            _inPlayerPossession = true;
+            transform.parent = player.HoldItemPosition;
+            transform.localPosition = Vector3.zero;
+            StartCoroutine(DelayToToggleFlag(player));
+        }  
     }
 
     IEnumerator DelayToToggleFlag(Player player)

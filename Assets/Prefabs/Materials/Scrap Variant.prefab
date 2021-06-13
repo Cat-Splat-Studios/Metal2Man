@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: af38051bbba49c840a266bd3bfd25040, type: 2}
     - target: {fileID: 2094750336299640952, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_Name
-      value: MaterialItemA
+      value: Scrap Variant
       objectReference: {fileID: 0}
     - target: {fileID: 4283029410219354756, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_RootOrder
@@ -33,15 +33,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4283029410219354756, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.2735438
+      value: -5.2005544
       objectReference: {fileID: 0}
     - target: {fileID: 4283029410219354756, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.877856
+      value: 0.00000023841858
       objectReference: {fileID: 0}
     - target: {fileID: 4283029410219354756, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.3427286
+      value: 2.2059574
       objectReference: {fileID: 0}
     - target: {fileID: 4283029410219354756, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
       propertyPath: m_LocalRotation.w
@@ -71,5 +71,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7069734176878810638, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 2334351664748773777, guid: 385da36e68d0be647bea612493fe266f, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c947bda17adc1748bca9a9b203b7b67, type: 3}
