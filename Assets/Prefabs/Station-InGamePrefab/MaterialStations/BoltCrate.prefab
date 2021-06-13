@@ -64,6 +64,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8652804022514786057}
     - target: {fileID: 4439448230072549622, guid: 5d3262536c5003e4b860df82f5175a83, type: 3}
+      propertyPath: AudioEventID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4439448230072549622, guid: 5d3262536c5003e4b860df82f5175a83, type: 3}
       propertyPath: PlacementPosition
       value: 
       objectReference: {fileID: 8523842339569685712}

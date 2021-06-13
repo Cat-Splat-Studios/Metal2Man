@@ -53,6 +53,7 @@ public class Item : MonoBehaviour
         
         if(player.IsInteracting)
         {
+            DataManager.MakeItRain<AudioHandler>(DataKeys.AUDIO).PlayAudio(EAudioEvents.PlayerPickUp);
             _inPlayerPossession = true;
             transform.position = player.HoldItemPosition.position;
             transform.parent = player.HoldItemPosition;

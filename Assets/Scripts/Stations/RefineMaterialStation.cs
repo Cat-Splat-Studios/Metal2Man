@@ -21,7 +21,7 @@ public class RefineMaterialStation : BaseStation
     private bool _itemProcessed;
     private bool _itemPlaced;
     private bool _processing;
-
+    
     [SerializeField] Slider progressBar;
     private float timeToReach; 
     
@@ -97,6 +97,7 @@ public class RefineMaterialStation : BaseStation
                         type.gameObject.transform.parent = MaterialPlacementPoints[_numOfCollectedMaterials];
                         _numOfCollectedMaterials++;
                         _collectedMaterials.Add(type.gameObject);
+                        DataManager.MakeItRain<AudioHandler>(DataKeys.AUDIO).PlayAudio(EAudioEvents.PlayerDropItem);
                         if(type.MaterialType != EMaterialTypes.Metal)
                         {
                             _currentOrderType = InfoAsset.Orders[i].OrderType;
@@ -109,7 +110,6 @@ public class RefineMaterialStation : BaseStation
                         break;
                     }
                 }
-
                 if(_itemPlaced) break;
             }
         }
@@ -135,6 +135,7 @@ public class RefineMaterialStation : BaseStation
         go.transform.position = PlacementPosition.position;
         go.transform.parent = PlacementPosition;
         yield return new WaitForSeconds(1);
+        DataManager.MakeItRain<AudioHandler>(DataKeys.AUDIO).PlayAudio(EAudioEvents.PlayerError);
         go.transform.position = _currentPlayer.HoldItemPosition.position;
         go.transform.parent = _currentPlayer.HoldItemPosition;
     }
@@ -142,6 +143,7 @@ public class RefineMaterialStation : BaseStation
     IEnumerator DelayToSpawnResult()
     {
         yield return new WaitForSeconds(1);
+        bool isLooping = DataManager.MakeItRain<AudioHandler>(DataKeys.AUDIO).PlayAudio(InfoAsset.StationEvent);
         foreach(GameObject _gameObject in _collectedMaterials)
         {
             Destroy(_gameObject);
@@ -167,6 +169,14 @@ public class RefineMaterialStation : BaseStation
         resultPrefab.transform.parent = PlacementPosition;
         _numOfCollectedMaterials = 0;
         _currentOrder = null;
+        if(Animator)
+        {
+            Animator.SetBool("Building", false);
+        }
+        if(isLooping)
+        {
+            DataManager.MakeItRain<AudioHandler>(DataKeys.AUDIO).StopLoopSource(InfoAsset.StationEvent);
+        }
         DataManager.MakeItRain<ScoreHandler>(DataKeys.SCORE).AddToScore(_currentOrderType);
         _currentOrderType = EOrderTypes.NULL;
         _itemProcessed = true;

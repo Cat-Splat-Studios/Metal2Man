@@ -17,3 +17,4 @@ MonoBehaviour:
     ProcessedResultPrefab: {fileID: 5890722822040397706, guid: b7c7b9b038ec3b246817c723c4f9d6d6, type: 3}
     OrderType: 0
   ProcessDuration: 0.5
+  StationEvent: 4

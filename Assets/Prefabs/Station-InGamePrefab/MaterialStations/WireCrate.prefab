@@ -63,6 +63,10 @@ PrefabInstance:
       propertyPath: Animator
       value: 
       objectReference: {fileID: 5528619094521192559}
+    - target: {fileID: 4439448230072549622, guid: 5d3262536c5003e4b860df82f5175a83, type: 3}
+      propertyPath: AudioEventID
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5546164533194749101, guid: 5d3262536c5003e4b860df82f5175a83, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

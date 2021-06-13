@@ -9,6 +9,7 @@ public class WorkStationInfo : ScriptableObject
     
     public List<WorkOrder> Orders;
     public float ProcessDuration;
+    public EAudioEvents StationEvent;
 }
 [Serializable]
 public class WorkOrder
