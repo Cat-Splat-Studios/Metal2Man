@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using TMPro;
 using System;
+using UnityEngine.InputSystem.Users;
 
 public class MenuHandler : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class MenuHandler : MonoBehaviour
 
     public string LevelName = "Level1";
 
+    [SerializeField] PlayerController controller;
     [SerializeField] PlayerInputManager inputManager;
 
     [SerializeField] InputAction SecondPlayerButton;
@@ -32,15 +34,22 @@ public class MenuHandler : MonoBehaviour
     private void OnDestroy()
     {
         SecondPlayerButton.Disable();
-        SecondPlayerButton.started -= ManualJoinPlayer;
+        SecondPlayerButton.performed -= ManualJoinPlayer;
     }
 
     private void ManualJoinPlayer(InputAction.CallbackContext obj)
-    {
-        GameObject temp = Instantiate(inputManager.playerPrefab);
-        PlayerInput inputs = temp.GetComponent<PlayerInput>();
-        inputs.SwitchCurrentControlScheme(Keyboard.current);
-        inputs.SwitchCurrentActionMap("SplitKeyboard");
+    {        
+        controller.AllowSplitKeyboard();
+
+        //GameObject temp = Instantiate(inputManager.playerPrefab);
+        //PlayerInput inputs = temp.GetComponent<PlayerInput>();
+        //inputs.defaultActionMap = "SplitKeyboard";
+        //inputs.SwitchCurrentControlScheme(Keyboard.current);
+        //inputs.SwitchCurrentActionMap("SplitKeyboard");
+
+        SecondPlayerButton.performed -= ManualJoinPlayer;
+
+        //InputUser.PerformPairingWithDevice(Keyboard.current, inputs.user);
     }
 
     public void OnPlayerJoined(PlayerInput input)

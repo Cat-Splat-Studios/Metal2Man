@@ -7,6 +7,14 @@ using UnityEngine;
 public static class PlayerManager
 {
     private static List<PlayerController> ActiveControllers = new List<PlayerController>();
+    private static bool isSplitKeyboard = false;
+
+    public static bool GetIsSplitKeyboard => isSplitKeyboard;
+
+    public static void SetSplitKeyboard(bool value)
+    {
+        isSplitKeyboard = value;
+    }
 
     public static void AddPlayer(PlayerController newController)
     {

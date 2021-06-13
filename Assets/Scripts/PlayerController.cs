@@ -7,8 +7,13 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     PlayerInput playerInputs;
+    [SerializeField] bool isSplitKeyboard = false;
 
     public PlayerInput PlayerInputs => playerInputs;
+
+    private PlayerInput splitKeyboardInputs;
+    public PlayerInput SplitKeyboard => splitKeyboardInputs;
+
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
@@ -23,12 +28,13 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Device is lost on " + gameObject.name);
     }
 
+    public void AllowSplitKeyboard()
+    {
+        PlayerManager.SetSplitKeyboard(true);
+    }
+
     private void OnDestroy()
     {
         PlayerManager.RemovePlayer(this);
-    }
-    public void Possess(Player player)
-    {
-        //playerInputs.actions["Move"].performed += player.mov
     }
 }

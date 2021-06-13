@@ -65,8 +65,18 @@ public class Player : MonoBehaviour
         if (input == null)
             input = controller.GetComponent<PlayerInput>();
 
-        input.actions["Move"].performed += UpdateMovementInput;
-        input.actions["Move"].canceled += UpdateMovementInput;
+        if (PlayerManager.GetIsSplitKeyboard == true && playerIndex == 1)
+        {
+            input.actions["Move1"].performed += UpdateMovementInput;
+            input.actions["Move1"].canceled += UpdateMovementInput;
+            
+            input.onActionTriggered += HandleInputs;
+        }
+        else
+        {
+            input.actions["Move"].performed += UpdateMovementInput;
+            input.actions["Move"].canceled += UpdateMovementInput;
+        }
 
         input.onActionTriggered += HandleInputs;
 
@@ -80,6 +90,16 @@ public class Player : MonoBehaviour
             controller = Instantiate(controllerPrefab) as PlayerController;
             Possess();
             return;
+        }
+
+        if (PlayerManager.GetIsSplitKeyboard == true && playerIndex == 1)
+        {
+            controller = PlayerManager.GetController(0);
+            if (controller != null)
+            {
+                Possess();
+                return;
+            }
         }
 
         if (PlayerManager.IsPlayerInRange(playerIndex))
@@ -152,9 +172,18 @@ public class Player : MonoBehaviour
     //we can do it in a switch - but movement should be seperate
     private void HandleInputs(InputAction.CallbackContext context)
     {
+        if (PlayerManager.GetIsSplitKeyboard && playerIndex == 1)
+        {
+            if (context.action.name == "Interact1")
+            {
+                ToggleInteractFlag();
+                return;
+            }
+        }
+
         switch (context.action.name)
         {
-            case "Interact":
+            case "Interact":                
                 ToggleInteractFlag();
                 break;
         }
