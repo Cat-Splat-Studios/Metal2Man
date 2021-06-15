@@ -2,11 +2,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+//using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    PlayerInput playerInputs;
+    /*PlayerInput playerInputs;
     [SerializeField] bool isSplitKeyboard = false;
 
     public PlayerInput PlayerInputs => playerInputs;
@@ -40,5 +40,5 @@ public class PlayerController : MonoBehaviour
     private void OnDestroy()
     {
         PlayerManager.RemovePlayer(this);
-    }
+    }*/
 }

@@ -2,25 +2,27 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
     //public InputAction input;
-    public PlayerInput input;
 
     public float PlayerSpeed;
     public float DashSpeed = 50;
-
+    
     public Transform HoldItemPosition;
     Vector2 inputVector_L; //left stick
     Vector2 inputVector_R; //left stick
     Vector3 MovementVector;
     Vector3 RotationVector;
-    float axisDeadZone = 0.15f;
+    float axisDeadZone = 0.05f;
     private bool _isInteracting;
     private bool _isHoldingItem;
+    private bool _isDashing;
+    private string _horizontal = "Horizontal";
+    private string _vertical = "Vertical";
+    private bool _isSecondPlayer;
     Rigidbody rb;
     public bool IsInteracting
     {
@@ -61,18 +63,26 @@ public class Player : MonoBehaviour
             Debug.Log("dash speed wasnt set defaulting to: " + DashSpeed);
         }
 
+        if(gameObject.tag == "Player2")
+        {
+            _horizontal = _horizontal + "2";
+            _vertical = _vertical + "2";
+            _isSecondPlayer = true;
+        }
+
         //ToDo - Need to make a Game Manager to create player instances then add them to the cloud with "Player" + index as the DataKey
         DataManager.ToTheCloud(gameObject.tag,this);
     }
 
     private void Possess()
     {
-        input = controller.PlayerInputs;
+        /*input = controller.PlayerInputs;
 
         if (input == null)
             input = controller.GetComponent<PlayerInput>();
+            */
 
-        if (PlayerManager.GetIsSplitKeyboard == true && playerIndex == 1)
+        /*if (PlayerManager.GetIsSplitKeyboard == true && playerIndex == 1)
         {
             input.actions["Move1"].performed += UpdateMovementInput;
             input.actions["Move1"].canceled += UpdateMovementInput;
@@ -84,18 +94,20 @@ public class Player : MonoBehaviour
             input.actions["Move"].canceled += UpdateMovementInput;
 
            // input.onActionTriggered += HandleInputs;
-        }
+        }*/
 
+        /*
         input.onActionTriggered += HandleInputs;
 
         input.ActivateInput(); //enable the input 
+        */
 
         PlayerManager.StorePlayer(this);
     }
 
     private void Start()
     {
-        if (bIsTest)
+        /*if (bIsTest)
         {
             controller = Instantiate(controllerPrefab) as PlayerController;
             Possess();
@@ -124,7 +136,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Controller not found, should be disabling this");
             gameObject.SetActive(false);
-        }
+        }*/
 
 
         //no idea what fookin happened to the rb but mass is 50 and i cant find this prefab in proj??? sooo here we go
@@ -132,16 +144,49 @@ public class Player : MonoBehaviour
         DashSpeed = 35;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        MovementVector = new Vector3(Input.GetAxis(_horizontal), 0, Input.GetAxis(_vertical)); 
+        
         HandleMovement();
-        //HandleRotation();
+        HandleRotation();
+        //Interact
+        if(!_isSecondPlayer && Input.GetButtonDown("Interact1"))
+        {
+            ToggleInteractFlag();
+        }
+        else if(_isSecondPlayer && Input.GetButtonDown("Interact2"))
+        {
+            ToggleInteractFlag();
+        }
+        if(!_isSecondPlayer && Input.GetButtonUp("Interact1"))
+        {
+            ToggleInteractFlag();
+        }
+        else if(_isSecondPlayer && Input.GetButtonUp("Interact2"))
+        {
+            ToggleInteractFlag();
+        }
+        
+        //Dash
+        if(!_isSecondPlayer && Input.GetKeyDown(KeyCode.Space))
+        {
+            PlayerDash();
+        }
+        else if(_isSecondPlayer && Input.GetKeyDown(KeyCode.RightShift))
+        {
+            PlayerDash();
+        }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            DataManager.MakeItRain<PauseMenu>(DataKeys.PAUSEMENU).HandleInputs();
+        }
     }
 
-    private void UpdateMovementInput(InputAction.CallbackContext context)
+    /*private void UpdateMovementInput(InputAction.CallbackContext context)
     {
         inputVector_L = context.ReadValue<Vector2>();
-    }
+    }*/
 
     public void ToggleInteractFlag()
     {
@@ -156,24 +201,22 @@ public class Player : MonoBehaviour
 
     private void HandleRotation()
     {
-        inputVector_R = input.actions["Look"].ReadValue<Vector2>();
+        //inputVector_R = input.actions["Look"].ReadValue<Vector2>();
+        if(MovementVector == Vector3.zero) return;
+        RotationVector = new Vector3(MovementVector.x, 0, MovementVector.y);
 
-        RotationVector = new Vector3(inputVector_R.x, 0, inputVector_R.y);
-
+        if(RotationVector != Vector3.zero)
         transform.rotation = Quaternion.LookRotation(RotationVector.normalized);
     }
 
     public void HandleMovement()
     {
-        MovementVector = new Vector3(inputVector_L.x, 0, inputVector_L.y);   
-
-       
         //only update rotation if the vector is greater than zero (if there was any input)
         //this is more or less a 'deadzone' on a joystick
         if (MovementVector.magnitude >= axisDeadZone)
         {
             //set our velocity to our input direction
-            rb.velocity = MovementVector.normalized * PlayerSpeed;
+            rb.velocity = MovementVector * PlayerSpeed;
 
             transform.rotation = Quaternion.LookRotation(MovementVector.normalized);
         }
@@ -185,11 +228,20 @@ public class Player : MonoBehaviour
     }
     private void PlayerDash()
     {
+        if(_isDashing) return;
         Debug.Log("dash boi");
         rb.AddForce(transform.forward * DashSpeed, ForceMode.Impulse);
+        StartCoroutine(DelayToResetDash());
+    }
+
+    IEnumerator DelayToResetDash()
+    {
+        _isDashing = true;
+        yield return new WaitForSeconds(0.5f);
+        _isDashing = false;
     }
     //we can do it in a switch - but movement should be seperate
-    private void HandleInputs(InputAction.CallbackContext context)
+    /*private void HandleInputs(InputAction.CallbackContext context)
     {
         if (PlayerManager.GetIsSplitKeyboard && playerIndex == 1)
         {
@@ -217,5 +269,5 @@ public class Player : MonoBehaviour
                     PlayerDash();
                 break;
         }
-    }
+    }*/
 }

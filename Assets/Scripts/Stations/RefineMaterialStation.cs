@@ -21,7 +21,7 @@ public class RefineMaterialStation : BaseStation
     private bool _itemProcessed;
     private bool _itemPlaced;
     private bool _processing;
-    
+    public Transform ResultPlacement;
     [SerializeField] Slider progressBar;
     private float timeToReach; 
     
@@ -34,7 +34,10 @@ public class RefineMaterialStation : BaseStation
         
         if (progressBar)
             progressBar.gameObject.SetActive(false);
-        
+        if(ResultPlacement == null)
+        {
+            ResultPlacement = MaterialPlacementPoints[0];
+        }
     }
 
     protected override void StationAction()
@@ -42,9 +45,9 @@ public class RefineMaterialStation : BaseStation
         if (_processing) return;
         if (!_currentPlayer.IsHoldingItem)
         {
-            if (PlacementPosition.childCount > 0)
+            if (ResultPlacement.childCount > 0)
             {
-                PlacementPosition.GetChild(0).GetComponent<Item>().GiveItem(_currentPlayer);
+                ResultPlacement.GetChild(0).GetComponent<Item>().GiveItem(_currentPlayer);
                 _processing = true;
                 StartCoroutine(DelayToPlaceItem());
                 return;
@@ -97,7 +100,7 @@ public class RefineMaterialStation : BaseStation
                         type.gameObject.transform.parent = MaterialPlacementPoints[_numOfCollectedMaterials];
                         _numOfCollectedMaterials++;
                         _collectedMaterials.Add(type.gameObject);
-                        DataManager.MakeItRain<AudioHandler>(DataKeys.AUDIO).PlayAudio(EAudioEvents.PlayerDropItem);
+                        DataManager.MakeItRain<AudioHandler>(DataKeys.AUDIO)?.PlayAudio(EAudioEvents.PlayerDropItem);
                         if(type.MaterialType != EMaterialTypes.Metal)
                         {
                             _currentOrderType = InfoAsset.Orders[i].OrderType;
@@ -135,7 +138,7 @@ public class RefineMaterialStation : BaseStation
         go.transform.position = PlacementPosition.position;
         go.transform.parent = PlacementPosition;
         yield return new WaitForSeconds(1);
-        DataManager.MakeItRain<AudioHandler>(DataKeys.AUDIO).PlayAudio(EAudioEvents.PlayerError);
+        DataManager.MakeItRain<AudioHandler>(DataKeys.AUDIO)?.PlayAudio(EAudioEvents.PlayerError);
         go.transform.position = _currentPlayer.HoldItemPosition.position;
         go.transform.parent = _currentPlayer.HoldItemPosition;
     }
@@ -164,9 +167,9 @@ public class RefineMaterialStation : BaseStation
         }
 
         yield return new WaitForSeconds(duration);
-        var resultPrefab = Instantiate(_currentOrder.ProcessedResultPrefab, PlacementPosition.position,
-            PlacementPosition.rotation);
-        resultPrefab.transform.parent = PlacementPosition;
+        var resultPrefab = Instantiate(_currentOrder.ProcessedResultPrefab, ResultPlacement.position,
+            ResultPlacement.rotation);
+        resultPrefab.transform.parent = ResultPlacement;
         _numOfCollectedMaterials = 0;
         _currentOrder = null;
         if(Animator)

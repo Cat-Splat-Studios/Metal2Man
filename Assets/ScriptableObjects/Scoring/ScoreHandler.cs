@@ -10,6 +10,13 @@ public class ScoreHandler : MonoBehaviour
     private float _currentScore;
     private const string _displayText = "Score: ";
     public ScoringRoster ScoreInfo;
+
+    public float CurrentScore
+    {
+        get => _currentScore;
+        set => _currentScore = value;
+    }
+
     private void Awake()
     {
         DataManager.ToTheCloud(DataKeys.SCORE, this);

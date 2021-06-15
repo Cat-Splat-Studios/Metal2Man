@@ -20,7 +20,7 @@ public class MaterialStation : BaseStation
         
         //Spawn Item then wait to replenish
         MaterialItem spawnedMaterialItem = Instantiate(Prefab, PlacementPosition.transform.position,PlacementPosition.rotation);
-        DataManager.MakeItRain<AudioHandler>(DataKeys.AUDIO).PlayAudio(AudioEventID);
+        DataManager.MakeItRain<AudioHandler>(DataKeys.AUDIO)?.PlayAudio(AudioEventID);
         spawnedMaterialItem.GiveItem(_currentPlayer);
         Animator.SetTrigger("Grab");
         base.StationAction();

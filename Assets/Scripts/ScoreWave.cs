@@ -41,6 +41,7 @@ public class ScoreWave : MonoBehaviour
 
             if (currentWaveValue >= 100.0f)
             {
+                DataManager.MakeItRain<GameManager>(DataKeys.GAMEMANAGER).EnableGameOverScreen();
                 Debug.Log("GAME OVER");
                 currentWaveValue = 100.0f;
                 isGameTime = false;

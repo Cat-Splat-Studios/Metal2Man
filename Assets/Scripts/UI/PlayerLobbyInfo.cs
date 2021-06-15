@@ -41,20 +41,22 @@ public class PlayerLobbyInfo : MonoBehaviour
         else
         {
             gameObject.SetActive(true);
+            /*
             if (controller.PlayerInputs.currentControlScheme == "Gamepad")
             {
                 buttonDisplays.text = gamepadInput;
             }
-
-            else
+            */
+            buttonDisplays.text = keyBoardInput;
+            /*else
             {
-                buttonDisplays.text = keyBoardInput;
-            }
+                
+            }*/
             //joinText.gameObject.SetActive(false);
         }
     }
 
-    public void UpdateInfo(UnityEngine.InputSystem.PlayerInput inputs)
+    /*public void UpdateInfo(UnityEngine.InputSystem.PlayerInput inputs)
     {
         gameObject.SetActive(true);
         Debug.Log("PlayerLobbyInfo: player control scheme is: " + inputs.currentControlScheme);
@@ -66,5 +68,5 @@ public class PlayerLobbyInfo : MonoBehaviour
         {
             buttonDisplays.text = keyBoardInput;
         }
-    }
+    }*/
 }

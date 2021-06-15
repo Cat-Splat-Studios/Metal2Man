@@ -22,6 +22,15 @@ public enum EAudioEvents
 //I'm sorry but I'm hella tired 
 public class AudioHandler : MonoBehaviour
 {
+    private static AudioHandler _instance;
+    public AudioHandler Instance
+    {
+        get => _instance;
+        set => _instance = value;
+    }
+
+    public bool Player2Joined;
+
     public List<AudioInfo> ListOfClips = new List<AudioInfo>();
     private AudioSource _audioSource;
     public AudioSource AssmblySource;
@@ -33,10 +42,24 @@ public class AudioHandler : MonoBehaviour
     
     private void Awake()
     {
+        if(!_instance)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         DataManager.ToTheCloud(DataKeys.AUDIO,this);
         _audioSource = GetComponent<AudioSource>();
         DontDestroyOnLoad(this);
     }
+
+    public void Joined()
+    {
+        Player2Joined = true;
+    }
+    
     //Returns true if audio event is looping
     public bool PlayAudio(EAudioEvents newEvent)
     {
