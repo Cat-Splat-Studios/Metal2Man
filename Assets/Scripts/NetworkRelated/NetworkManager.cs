@@ -21,8 +21,14 @@ public class NetworkManager : MonoBehaviour
     private bool _deadConnection;
     private bool _leavingGame;
     private bool _forceCreate = true;
+
+    private NetworkPanel _networkPanel;
+    
     void Awake()
     {
+        _networkPanel = FindObjectOfType<NetworkPanel>();
+        _networkPanel.CloseAllScreens();
+        _networkPanel.gameObject.SetActive(false);
         _bcWrapper = GetComponent<BrainCloudWrapper>();
         if (!Instance)
         {
@@ -45,27 +51,14 @@ public class NetworkManager : MonoBehaviour
 
     public void Login()
     {
-        NetworkPanel networkPanel = FindObjectOfType<NetworkPanel>();
-
-        string username = networkPanel.UsernameField.text;
-        string password = networkPanel.PasswordField.text;
-        if (username.IsNullOrEmpty())
-        {
-            //Need an error pop up thingy
-            return;
-        }
-        if (password.IsNullOrEmpty())
-        {
-            //Need an error pop up thingy
-            return;
-        }
-
-        _currentUser.Username = networkPanel.UsernameField.text;
+        if (!_networkPanel.AreInputFieldsValid()) return;
+        _currentUser = new UserInfo();
+        _currentUser.Username = _networkPanel.UsernameInputField.text;
         InitializeBC();
         _bcWrapper.AuthenticateUniversal
             (
-                username,
-                password,
+                _networkPanel.UsernameInputField.text,
+                _networkPanel.PasswordInputField.text,
                 _forceCreate,
                 HandlePlayerState,
                 LoggingInError,
@@ -92,7 +85,7 @@ public class NetworkManager : MonoBehaviour
 
     void OnLoggedIn(string jsonResponse, object cbObject)
     {
-        
+        _networkPanel.SetUpMenu();
     }
 
     void HandlePlayerState(string jsonResponse, object cbObject)
@@ -147,6 +140,7 @@ public class NetworkManager : MonoBehaviour
         string message = cbObject as string;
         
         //Need an error pop up thingy
+        _networkPanel.ErrorPopUp(message);
     }
 
 #endregion
